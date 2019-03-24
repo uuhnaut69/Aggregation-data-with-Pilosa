@@ -10,48 +10,64 @@ import javax.validation.constraints.NotBlank;
 public class User {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private long id;
+	private int id;
 	@NotBlank(message = "Name is mandatory")
 	private String name;
 
-	@NotBlank(message = "Email is mandatory")
-	private String email;
+	private int age;
 
 	public User() {
 	}
 
-	public User(String name, String email) {
+	public User(String name, int age) {
 		this.name = name;
-		this.email = email;
+		this.age = age;
 	}
 
-	public void setId(long id) {
-		this.id = id;
-	}
-
-	public long getId() {
+	/**
+	 * @return the id
+	 */
+	public int getId() {
 		return id;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	/**
+	 * @param id the id to set
+	 */
+	public void setId(int id) {
+		this.id = id;
 	}
 
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
+	/**
+	 * @return the name
+	 */
 	public String getName() {
 		return name;
 	}
 
-	public String getEmail() {
-		return email;
+	/**
+	 * @param name the name to set
+	 */
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	/**
+	 * @return the age
+	 */
+	public int getAge() {
+		return age;
+	}
+
+	/**
+	 * @param age the age to set
+	 */
+	public void setAge(int age) {
+		this.age = age;
 	}
 
 	@Override
 	public String toString() {
-		return "User{" + "id=" + id + ", name=" + name + ", email=" + email + '}';
+		return "User{" + "id=" + id + ", name=" + name + ", age=" + age + '}';
 	}
 }
