@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import com.huutuan.bitmap.Entity.User;
+import com.huutuan.bitmap.Pilosa.StarTrace;
 import com.huutuan.bitmap.Repository.UserRepository;
 
 @Controller
@@ -22,6 +23,9 @@ public class UserController {
 	public UserController(UserRepository userRepository) {
 		this.userRepository = userRepository;
 	}
+
+	@Autowired
+	private StarTrace starTrace;
 
 	@GetMapping("/signup")
 	public String showSignUpForm(User user) {
@@ -65,6 +69,12 @@ public class UserController {
 				.orElseThrow(() -> new IllegalArgumentException("Invalid user Id:" + id));
 		userRepository.delete(user);
 		model.addAttribute("users", userRepository.findAll());
+		return "index";
+	}
+
+	@GetMapping("/pilosa")
+	public String getData() {
+		starTrace.getData();
 		return "index";
 	}
 }

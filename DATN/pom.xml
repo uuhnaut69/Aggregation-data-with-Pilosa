@@ -46,7 +46,7 @@
 			<artifactId>h2</artifactId>
 			<scope>runtime</scope>
 		</dependency>
-		
+
 		<!-- Add JMH lib -->
 		<dependency>
 			<groupId>org.openjdk.jmh</groupId>
@@ -68,6 +68,13 @@
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
 			<scope>runtime</scope>
+		</dependency>
+
+		<!-- Pilosa -->
+		<dependency>
+			<groupId>com.pilosa</groupId>
+			<artifactId>pilosa-client</artifactId>
+			<version>1.2.0</version>
 		</dependency>
 	</dependencies>
 
