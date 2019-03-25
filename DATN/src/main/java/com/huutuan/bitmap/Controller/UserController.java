@@ -27,6 +27,12 @@ public class UserController {
 	@Autowired
 	private StarTrace starTrace;
 
+	@GetMapping("/")
+	public String homePage(Model model) {
+		model.addAttribute("users", userRepository.findAll());
+		return "index";
+	}
+
 	@GetMapping("/signup")
 	public String showSignUpForm(User user) {
 		return "add-user";

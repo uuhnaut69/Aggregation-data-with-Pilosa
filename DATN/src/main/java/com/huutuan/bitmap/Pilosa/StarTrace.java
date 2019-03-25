@@ -33,7 +33,6 @@ public class StarTrace {
 		Field language = repository.field("language");
 
 		QueryResponse response;
-		QueryResult result;
 		PqlQuery query;
 		List<Long> repositoryIDs;
 

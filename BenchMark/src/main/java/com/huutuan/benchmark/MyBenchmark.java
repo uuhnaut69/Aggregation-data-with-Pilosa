@@ -31,27 +31,59 @@
 
 package com.huutuan.benchmark;
 
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.BenchmarkMode;
 import org.openjdk.jmh.annotations.Mode;
 import org.openjdk.jmh.annotations.OutputTimeUnit;
+import org.openjdk.jmh.annotations.Scope;
+import org.openjdk.jmh.annotations.State;
 
+import com.pilosa.client.PilosaClient;
+import com.pilosa.client.QueryResponse;
+import com.pilosa.client.exceptions.PilosaException;
+import com.pilosa.client.orm.Field;
+import com.pilosa.client.orm.Index;
+import com.pilosa.client.orm.Schema;
+
+@State(Scope.Thread)
 public class MyBenchmark {
 
 	@Benchmark
-	@BenchmarkMode(Mode.AverageTime)
+	@BenchmarkMode(Mode.Throughput)
 	@OutputTimeUnit(TimeUnit.MICROSECONDS)
-	public void testMethod() {
-		doMagic();
+	public void pilosaMethod() {
+		getDataPilosa();
 	}
 
-	public static void doMagic() {
+	// get Data by Pilosa Client
+	public void getDataPilosa() {
+		// We will just use the default client which assumes the server is at
+		// http://localhost:10101
+		PilosaClient client = PilosaClient.defaultClient();
+
+		// Let's load the schema from the server.
+		Schema schema;
 		try {
-			Thread.sleep(2000);
-		} catch (InterruptedException ignored) {
+			schema = client.readSchema();
+		} catch (PilosaException ex) {
+			// Most calls will return an error value.
+			// You should handle them appropriately.
+			// We will just terminate the program in this case.
+			throw new RuntimeException(ex);
 		}
-	}
+		// We need to refer to indexes and fields before we can use them in a query.
+		Index repository = schema.index("repository");
+		Field stargazer = repository.field("stargazer");
+//		Field language = repository.field("language");
+		QueryResponse response;
+//		PqlQuery query;
+		List<Long> repositoryIDs;
 
+		// Which repositories did user 14 star:
+		response = client.query(stargazer.row(14));
+		repositoryIDs = response.getResult().getRow().getColumns();
+	}
 }
