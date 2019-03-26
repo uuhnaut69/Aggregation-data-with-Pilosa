@@ -1,8 +1,6 @@
 package com.huutuan.bitmap.Entity;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.validation.constraints.NotBlank;
 
@@ -19,7 +17,9 @@ public class User {
 	public User() {
 	}
 
-	public User(String name, int age) {
+	public User(int id, String name, int age) {
+		super();
+		this.id = id;
 		this.name = name;
 		this.age = age;
 	}
