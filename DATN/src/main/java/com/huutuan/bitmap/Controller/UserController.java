@@ -47,7 +47,8 @@ public class UserController {
 
 		int totalPages = userPage.getTotalPages();
 		if (totalPages > 0) {
-			List<Integer> pageNumbers = IntStream.rangeClosed(currentPage, currentPage+4).boxed().collect(Collectors.toList());
+			List<Integer> pageNumbers = IntStream.rangeClosed(currentPage, currentPage + 4).boxed()
+					.collect(Collectors.toList());
 			model.addAttribute("pageNumbers", pageNumbers);
 		}
 		model.addAttribute("listUser", userPage.getContent());
