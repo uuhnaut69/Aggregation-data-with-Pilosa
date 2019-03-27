@@ -1,15 +1,10 @@
 package com.huutuan.bitmap.Controller;
 
 import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -19,10 +14,15 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.huutuan.bitmap.DAO.UserDAO;
+import com.huutuan.bitmap.Entity.SearchRespModel;
 import com.huutuan.bitmap.Entity.User;
 import com.huutuan.bitmap.Pilosa.StarTrace;
 import com.huutuan.bitmap.Service.UserService;
 
+/**
+ * @author uuhnaut
+ *
+ */
 @Controller
 public class UserController {
 	private final UserDAO userRepository;
@@ -38,20 +38,11 @@ public class UserController {
 	private UserService userService;
 
 	@GetMapping("/list-user")
-	public String homePage(Model model, @RequestParam("page") Optional<Integer> page,
-			@RequestParam("size") Optional<Integer> size) {
-		final int currentPage = page.orElse(1);
-		final int pageSize = size.orElse(10);
-		Page<User> userPage = userService.findPaginated(PageRequest.of(currentPage - 1, pageSize));
-		model.addAttribute("userPage", userPage);
-
-		int totalPages = userPage.getTotalPages();
-		if (totalPages > 0) {
-			List<Integer> pageNumbers = IntStream.rangeClosed(currentPage, currentPage + 4).boxed()
-					.collect(Collectors.toList());
-			model.addAttribute("pageNumbers", pageNumbers);
-		}
-		model.addAttribute("listUser", userPage.getContent());
+	public String homePage(Model model, @RequestParam("pageNo") int pageNo, @RequestParam("pageSize") int pageSize) {
+		SearchRespModel respModel = userService.getDataSearch(pageNo, pageSize);
+		model.addAttribute("searchRespModel", respModel);
+		List<User> listUser = respModel.getListUser();
+		model.addAttribute("listUser", listUser);
 		return "index";
 	}
 

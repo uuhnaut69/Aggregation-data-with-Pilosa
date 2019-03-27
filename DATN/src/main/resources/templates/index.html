@@ -32,7 +32,7 @@
 						</tr>
 					</thead>
 					<tbody>
-						<tr th:each="user : ${userPage.content}">
+						<tr th:each="user : ${listUser}">
 							<td scope="row" th:text="${user.id}"></td>
 							<td scope="row" th:text="${user.name}"></td>
 							<td scope="row" th:text="${user.age}"></td>
@@ -43,13 +43,13 @@
 						</tr>
 					</tbody>
 				</table>
-				<div th:if="${userPage.totalPages > 0}" class="pagination"
+				<!-- <div th:if="${searchRespModel.totalPage > 0}" class="pagination"
 					th:each="pageNumber : ${pageNumbers}">
 					<a
-						th:href="@{/list-user(size=${userPage.size}, page=${pageNumber})}"
+						th:href="@{/list-user(size=${searchRespModel.pageSize}, page=${pageNumber})}"
 						th:text=${pageNumber}
 						th:class="${pageNumber==userPage.number + 1} ? active"></a>
-				</div>
+				</div> -->
 			</div>
 		</div>
 	</div>
