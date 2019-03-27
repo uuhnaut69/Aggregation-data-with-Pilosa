@@ -11,7 +11,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @SpringBootApplication
 @EnableAutoConfiguration
 @ComponentScan(basePackages = { "com.huutuan.bitmap" })
-@EnableJpaRepositories(basePackages = "com.huutuan.bitmap.DAO")
+@EnableJpaRepositories(basePackages = "com.huutuan.bitmap.Repository")
 @EnableTransactionManagement
 @EntityScan(basePackages = "com.huutuan.bitmap.Entity")
 public class Application {

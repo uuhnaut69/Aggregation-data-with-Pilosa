@@ -43,13 +43,13 @@
 						</tr>
 					</tbody>
 				</table>
-				<!-- <div th:if="${searchRespModel.totalPage > 0}" class="pagination"
+				<div th:if="${searchRespModel.totalPage > 0}" class="pagination"
 					th:each="pageNumber : ${pageNumbers}">
 					<a
 						th:href="@{/list-user(size=${searchRespModel.pageSize}, page=${pageNumber})}"
 						th:text=${pageNumber}
-						th:class="${pageNumber==userPage.number + 1} ? active"></a>
-				</div> -->
+						th:class="${pageNumber==searchRespModel.pageNo + 1} ? active"></a>
+				</div>
 			</div>
 		</div>
 	</div>

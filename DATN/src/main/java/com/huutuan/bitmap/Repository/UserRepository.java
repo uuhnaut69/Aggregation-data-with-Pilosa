@@ -1,4 +1,4 @@
-package com.huutuan.bitmap.DAO;
+package com.huutuan.bitmap.Repository;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -12,6 +12,6 @@ import com.huutuan.bitmap.Entity.User;
  *
  */
 @Repository
-public interface UserDAO extends PagingAndSortingRepository<User, Integer> {
+public interface UserRepository extends PagingAndSortingRepository<User, Integer> {
 	Page<User> findAll(Pageable pageable);
 }
