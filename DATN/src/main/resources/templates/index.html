@@ -46,7 +46,7 @@
 				<div th:if="${searchRespModel.totalPage > 0}" class="pagination"
 					th:each="pageNumber : ${pageNumbers}">
 					<a
-						th:href="@{/list-user(size=${searchRespModel.pageSize}, page=${pageNumber})}"
+						th:href="@{/users(pageSize=${searchRespModel.pageSize}, pageNo=${pageNumber})}"
 						th:text=${pageNumber}
 						th:class="${pageNumber==searchRespModel.pageNo + 1} ? active"></a>
 				</div>

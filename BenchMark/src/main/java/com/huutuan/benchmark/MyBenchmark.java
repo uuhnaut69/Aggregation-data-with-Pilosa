@@ -86,4 +86,5 @@ public class MyBenchmark {
 		response = client.query(stargazer.row(14));
 		repositoryIDs = response.getResult().getRow().getColumns();
 	}
+
 }
