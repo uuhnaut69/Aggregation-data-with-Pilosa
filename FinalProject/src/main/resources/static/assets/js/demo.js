@@ -643,17 +643,17 @@ demo = {
         } else if (type == 'warning-message-and-confirmation') {
             swal({
                 title: 'Are you sure?',
-                text: "You won't be able to revert this!",
+                text: "The operation will take time to complete.",
                 type: 'warning',
                 showCancelButton: true,
                 confirmButtonClass: 'btn btn-success',
                 cancelButtonClass: 'btn btn-danger',
-                confirmButtonText: 'Yes, delete it!',
+                confirmButtonText: 'Okay!',
                 buttonsStyling: false
             }).then(function() {
                 swal({
-                    title: 'Deleted!',
-                    text: 'Your file has been deleted.',
+                    title: 'Done!',
+                    text: 'BenchMark Completed',
                     type: 'success',
                     confirmButtonClass: "btn btn-success",
                     buttonsStyling: false

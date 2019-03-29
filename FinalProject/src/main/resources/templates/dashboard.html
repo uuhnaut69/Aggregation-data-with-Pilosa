@@ -93,6 +93,31 @@
 								</div>
 								<div class="card-content">
 									<h4 class="card-title">Top 10 Images</h4>
+									<div>
+										<div class="row">
+											<div class="col-md-6">
+												<button class="btn btn-success"
+													onclick="demo.showSwal('warning-message-and-confirmation')">
+													BenchMark
+													<div class="ripple-container"></div>
+												</button>
+											</div>
+											<div class="col-md-6">
+												<div class="card">
+													<div class="card-header card-header-icon"
+														data-background-color="rose">
+														<i class="material-icons">insert_chart</i>
+													</div>
+													<div class="card-content">
+														<h4 class="card-title">
+															Multiple Bars Chart <small>- Bar Chart</small>
+														</h4>
+													</div>
+													<div id="multipleBarsChart" class="ct-chart"></div>
+												</div>
+											</div>
+										</div>
+									</div>
 								</div>
 							</div>
 						</div>
@@ -195,4 +220,9 @@
 <!-- Material Dashboard javascript methods -->
 <script th:src="@{../assets/js/material-dashboard.js}"></script>
 <script th:src="@{../assets/js/demo.js}"></script>
+<script>
+	$(document).ready(function() {
+		demo.initCharts();
+	});
+</script>
 </html>
