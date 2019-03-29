@@ -4,6 +4,10 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.validation.constraints.NotBlank;
 
+/**
+ * @author uuhnaut
+ *
+ */
 @Entity
 public class User {
 

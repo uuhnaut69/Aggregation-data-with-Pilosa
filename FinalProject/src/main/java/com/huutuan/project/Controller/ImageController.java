@@ -8,6 +8,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import com.huutuan.project.Entity.Image;
 import com.huutuan.project.Repository.ImageRepository;
 
+/**
+ * @author uuhnaut
+ *
+ */
 @Controller
 public class ImageController {
 	private final ImageRepository imageRepository;

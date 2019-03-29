@@ -7,6 +7,10 @@ import org.springframework.stereotype.Repository;
 
 import com.huutuan.project.Entity.User;
 
+/**
+ * @author uuhnaut
+ *
+ */
 @Repository
 public interface UserRepository extends CrudRepository<User, Long> {
 

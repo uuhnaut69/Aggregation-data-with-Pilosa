@@ -13,6 +13,10 @@ import com.huutuan.project.Entity.User;
 import com.huutuan.project.Repository.UserRepository;
 
 
+/**
+ * @author uuhnaut
+ *
+ */
 @Controller
 public class UserControler {
 	private final UserRepository userRepository;

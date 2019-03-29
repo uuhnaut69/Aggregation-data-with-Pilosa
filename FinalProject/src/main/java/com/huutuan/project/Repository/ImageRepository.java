@@ -7,6 +7,10 @@ import org.springframework.stereotype.Repository;
 
 import com.huutuan.project.Entity.Image;
 
+/**
+ * @author uuhnaut
+ *
+ */
 @Repository
 public interface ImageRepository extends CrudRepository<Image, Long> {
 	List<Image> findByTitle(String title);
