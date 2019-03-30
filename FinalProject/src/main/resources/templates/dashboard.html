@@ -92,12 +92,12 @@
 									<i class="material-icons">&#xE894;</i>
 								</div>
 								<div class="card-content">
-									<h4 class="card-title">Tools</h4>
+									<h4 class="card-title">Options</h4>
 									<div>
 										<div class="row">
 											<div class="col-md-6">
-												<button class="btn btn-success"
-													onclick="demo.showSwal('warning-message-and-confirmation')">
+												<button class="btn btn-info"
+													onclick="project.showSwal('warning-message-and-confirmation')">
 													BenchMark
 													<div class="ripple-container"></div>
 												</button>
@@ -219,10 +219,10 @@
 <script th:src="@{../assets/js/jquery.tagsinput.js}"></script>
 <!-- Material Dashboard javascript methods -->
 <script th:src="@{../assets/js/material-dashboard.js}"></script>
-<script th:src="@{../assets/js/demo.js}"></script>
+<script th:src="@{../assets/js/project.js}"></script>
 <script>
 	$(document).ready(function() {
-		demo.initCharts();
+		project.initCharts();
 	});
 </script>
 </html>
