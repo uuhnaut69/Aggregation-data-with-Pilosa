@@ -3,6 +3,10 @@ package com.huutuan.project.Entity;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
+/**
+ * @author uuhnaut
+ *
+ */
 @Entity
 public class LikeShare {
 

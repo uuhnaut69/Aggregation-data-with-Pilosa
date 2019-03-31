@@ -1,10 +1,8 @@
 package com.huutuan.project.Repository;
 
-import java.util.List;
-
 import org.springframework.stereotype.Repository;
 
-import com.huutuan.project.Entity.LikeShare;
+import com.huutuan.project.Entity.AjaxRespModel;
 
 /**
  * @author uuhnaut
@@ -13,5 +11,5 @@ import com.huutuan.project.Entity.LikeShare;
 @Repository
 public interface UsersImagesRepository {
 
-	List<LikeShare> doBenchMark();
+	AjaxRespModel doBenchMark();
 }
