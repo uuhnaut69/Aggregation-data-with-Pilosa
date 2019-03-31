@@ -1,12 +1,13 @@
 package com.huutuan.project.Controller;
 
+import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
-import com.huutuan.project.Entity.Image;
 import com.huutuan.project.Repository.ImageRepository;
+import com.huutuan.project.Repository.UsersImagesRepository;
 
 /**
  * @author uuhnaut
@@ -14,16 +15,26 @@ import com.huutuan.project.Repository.ImageRepository;
  */
 @Controller
 public class ImageController {
-	private final ImageRepository imageRepository;
+	@Autowired
+	private ImageRepository imageRepository;
 
 	@Autowired
-	public ImageController(ImageRepository imageRepository) {
-		this.imageRepository = imageRepository;
-	}
+	private UsersImagesRepository usersImagesRepository;
 
 	@GetMapping("/")
-	public String showSignUpForm(Image image, Model model) {
+	public String getData(Model model) {
 		model.addAttribute("images", imageRepository.findAll());
+		return "dashboard";
+	}
+
+	@GetMapping("/doBenchMark")
+	public String doBenchMark(Model model) {
+		Long startTime = new DateTime().getMillis();
+		System.out.println(usersImagesRepository.doBenchMark());
+		Long endTime = new DateTime().getMillis();
+		Long runTime = endTime - startTime;
+		model.addAttribute("runTime", runTime);
+		model.addAttribute("respBenchMark", usersImagesRepository.doBenchMark());
 		return "dashboard";
 	}
 }

@@ -92,17 +92,17 @@
 									<i class="material-icons">&#xE894;</i>
 								</div>
 								<div class="card-content">
-									<h4 class="card-title">Options</h4>
+									<h4 class="card-title">Option</h4>
 									<div>
 										<div class="row">
-											<div class="col-md-6">
+											<div class="col-md-3">
 												<button class="btn btn-info"
 													onclick="project.showSwal('warning-message-and-confirmation')">
 													BenchMark
 													<div class="ripple-container"></div>
 												</button>
 											</div>
-											<div class="col-md-6">
+											<div class="col-md-9">
 												<div class="card">
 													<div class="card-header card-header-icon"
 														data-background-color="rose">
@@ -110,10 +110,15 @@
 													</div>
 													<div class="card-content">
 														<h4 class="card-title">
-															Multiple Bars Chart <small>- Bar Chart</small>
+															Likes, Shares Chart <small>- Bar Chart</small>
 														</h4>
 													</div>
 													<div id="multipleBarsChart" class="ct-chart"></div>
+													<div class="tim-typo">
+														<span class="text-primary">Runtime: <span
+															th:text=${runTime}> </span>ms
+														</span>
+													</div>
 												</div>
 											</div>
 										</div>
@@ -220,9 +225,9 @@
 <!-- Material Dashboard javascript methods -->
 <script th:src="@{../assets/js/material-dashboard.js}"></script>
 <script th:src="@{../assets/js/project.js}"></script>
-<script>
+<!-- <script>
 	$(document).ready(function() {
 		project.initCharts();
 	});
-</script>
+</script> -->
 </html>

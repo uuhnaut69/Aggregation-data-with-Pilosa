@@ -1,5 +1,7 @@
 package com.huutuan.project.Entity;
 
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
@@ -16,19 +18,6 @@ public class Image {
 	private String description;
 
 	private String url;
-
-	public Image() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-
-	public Image(int id, String title, String description, String url) {
-		super();
-		this.id = id;
-		this.title = title;
-		this.description = description;
-		this.url = url;
-	}
 
 	/**
 	 * @return the id
@@ -86,8 +75,4 @@ public class Image {
 		this.url = url;
 	}
 
-	@Override
-	public String toString() {
-		return "Image{" + "id=" + id + ", title=" + title + ", description=" + description + ",url=" + url + '}';
-	}
 }
