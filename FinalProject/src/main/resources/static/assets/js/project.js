@@ -26,39 +26,33 @@ project = {
 	// function Init Chart
 	initCharts: function(listLabel,listTotalLikes,listTotalShares) {
 	    if ($('#multipleBarsChart').length != 0) {
-	
-	
 	    	 var dataMultipleBarsChart = {
-	                 labels: listLabel,
-	                 series: [
-	                	 listTotalLikes,
-	                	 listTotalShares
-	                 ]
-	             };
-
-	             var optionsMultipleBarsChart = {
-	                 seriesBarDistance: 10,
-	                 axisX: {
-	                     showGrid: false
-	                 },
-	                 height: '300px'
-	             };
-
-	             var responsiveOptionsMultipleBarsChart = [
-	                 ['screen and (max-width: 640px)', {
-	                     seriesBarDistance: 5,
-	                     axisX: {
-	                         labelInterpolationFnc: function(value) {
-	                             return value[0];
-	                         }
-	                     }
-	                 }]
-	             ];
-
-	             var multipleBarsChart = Chartist.Bar('#multipleBarsChart', dataMultipleBarsChart, optionsMultipleBarsChart, responsiveOptionsMultipleBarsChart);
-
-	             // start animation for the Emails Subscription Chart
-	             md.startAnimationForBarChart(multipleBarsChart);
+                 labels: listLabel,
+                 series: [
+                	 listTotalLikes,
+                	 listTotalShares
+                 ]
+             };
+             var optionsMultipleBarsChart = {
+                 seriesBarDistance: 10,
+                 axisX: {
+                     showGrid: false
+                 },
+                 height: '300px'
+             };
+             var responsiveOptionsMultipleBarsChart = [
+                 ['screen and (max-width: 640px)', {
+                     seriesBarDistance: 5,
+                     axisX: {
+                         labelInterpolationFnc: function(value) {
+                             return value[0];
+                         }
+                     }
+                 }]
+             ];
+             var multipleBarsChart = Chartist.Bar('#multipleBarsChart', dataMultipleBarsChart, optionsMultipleBarsChart, responsiveOptionsMultipleBarsChart);
+             // start animation for the Emails Subscription Chart
+             md.startAnimationForBarChart(multipleBarsChart);
 	    }
 	
 	},

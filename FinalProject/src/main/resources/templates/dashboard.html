@@ -165,6 +165,27 @@
 			</footer>
 		</div>
 	</div>
+
+	<!-- Modal show chart -->
+	<div class="modal" tabindex="-1" role="dialog" id="modalChart">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<div class="card-content">
+						<h4 class="card-title">
+							Single BenchMark
+						</h4>
+					</div>
+				</div>
+				<div class="modal-body" id="modalChartsContent"></div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary"
+						data-dismiss="modal" id="closeModal">Close</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
 </body>
 <!--   Core JS Files   -->
 <script th:src="@{../assets/js/jquery-3.3.1.min.js}"
@@ -253,18 +274,22 @@
 								.push(data.list[i][2]);
 					}
 				}
-				$("#contentChart").remove();
+				$("#modaContentChart").remove();
 				var html = "";
-				html = '<div class="card" id="contentChart"><div class="card-header card-header-icon" data-background-color="rose"> <i class="material-icons">insert_chart</i> </div> <div class="card-content">'
+				html = '<div class="card" id="modaContentChart"><div class="card-header card-header-icon" data-background-color="rose"> <i class="material-icons">insert_chart</i> </div> <div class="card-content">'
 						+ '<h4 class="card-title">Likes, Shares Chart <small>- Bar Chart</small> </h4></div><div id="multipleBarsChart" class="ct-chart"></div><div class="tim-typo"><span class="text-primary" style="font-weight: bold; font-size: 1.4em;">Runtime: '
 						+ data.queryTime
 						+ 'ms</span> </div></div>';
-				$("#divChart").append(html);
+				$("#modalChartsContent").append(html);
 				project.initCharts(listLabel, listTotalLikes, listTotalShares);
 				project.showNotification('bottom','left');
+				$("#modalChart").show();
 			}
 		});
 	}
 	
+	$("#closeModal").click(function(){
+		$("#modalChart").hide();
+	})
 </script>
 </html>
