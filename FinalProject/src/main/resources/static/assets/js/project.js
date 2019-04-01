@@ -23,6 +23,7 @@ project = {
 	    }
 	},
 
+	// function Init Chart
 	initCharts: function(listLabel,listTotalLikes,listTotalShares) {
 	    if ($('#multipleBarsChart').length != 0) {
 	
@@ -61,5 +62,21 @@ project = {
 	    }
 	
 	},
+	
+	//Notification
+	showNotification: function(from, align) {
+        $.notify({
+            icon: "notifications",
+            message: "The operation successfully completed"
+
+        }, {
+            type: 'success',
+            timer: 3000,
+            placement: {
+                from: from,
+                align: align
+            }
+        });
+    }
 
 }

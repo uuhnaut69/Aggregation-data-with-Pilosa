@@ -122,17 +122,10 @@
 											class="btn btn-danger btn-simple fix-broken-card">
 											<i class="material-icons">build</i> Fix Header!
 										</button>
-										<button type="button" class="btn btn-default btn-simple"
-											rel="tooltip" data-placement="bottom" title="View">
-											<i class="material-icons">art_track</i>
-										</button>
-										<button type="button" class="btn btn-success btn-simple"
-											rel="tooltip" data-placement="bottom" title="Edit">
-											<i class="material-icons">edit</i>
-										</button>
-										<button type="button" class="btn btn-danger btn-simple"
-											rel="tooltip" data-placement="bottom" title="Remove">
-											<i class="material-icons">close</i>
+										<button class="btn btn-info" rel="tooltip"
+											data-placement="bottom" style="height: 38px;">
+											BenchMark
+											<div class="ripple-container"></div>
 										</button>
 									</div>
 									<h4 class="card-title">
@@ -172,8 +165,6 @@
 		</div>
 	</div>
 </body>
-
-
 <!--   Core JS Files   -->
 <script th:src="@{../assets/js/jquery-3.3.1.min.js}"
 	type="text/javascript"></script>
@@ -209,11 +200,7 @@
 <script th:src="@{../assets/js/project.js}"></script>
 
 <script type="text/javascript">
-	$(document).ready(function() {
-		project.initCharts();
-	});
-
-	$("#benchMarkBtn").click( function() {
+	$("#benchMarkBtn").click(function() {
 		$.ajax({
 			type : "GET",
 			dataType : "json",
@@ -232,12 +219,15 @@
 								.push(data.list[i][2]);
 					}
 				}
-				var html = '';
-				html = '<div class="card"><div class="card-header card-header-icon" data-background-color="rose"> <i class="material-icons">insert_chart</i> </div> <div class="card-content">'
-						+ '<h4 class="card-title">Likes, Shares Chart <small>- Bar Chart</small> </h4></div><div id="multipleBarsChart" class="ct-chart"></div><div class="tim-typo"><span class="text-primary">Runtime: <spanth:text=${runTime}> </span>ms'
-						+ '</span> </div></div>';
+				$("#contentChart").remove();
+				var html = "";
+				html = '<div class="card" id="contentChart"><div class="card-header card-header-icon" data-background-color="rose"> <i class="material-icons">insert_chart</i> </div> <div class="card-content">'
+						+ '<h4 class="card-title">Likes, Shares Chart <small>- Bar Chart</small> </h4></div><div id="multipleBarsChart" class="ct-chart"></div><div class="tim-typo"><span class="text-primary" style="font-weight: bold; font-size: 1.4em;">Runtime: '
+						+ data.queryTime
+						+ 'ms</span> </div></div>';
 				$("#divChart").append(html);
-				project.initCharts(listLabel,listTotalLikes,listTotalShares);
+				project.initCharts(listLabel, listTotalLikes, listTotalShares);
+				project.showNotification('bottom','left');
 			}
 		});
 	})
