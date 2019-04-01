@@ -22,66 +22,9 @@
 </head>
 <body>
 	<div class="wrapper">
-		<div class="sidebar" data-active-color="rose"
-			data-background-color="black"
-			data-image="../assets/img/sidebar-1.jpg">
-			<div class="logo">
-				<a href="#" class="simple-text logo-mini"> DB </a> <a href="#"
-					class="simple-text logo-normal"> DashBoard </a>
-			</div>
-			<div class="sidebar-wrapper">
-				<div class="user">
-					<div class="photo">
-						<img th:src="@{../assets/img/faces/avatar.jpg}" />
-					</div>
-					<div class="info">
-						<a> <span> TEST </span>
-						</a>
-						<div class="clearfix"></div>
-					</div>
-				</div>
-				<ul class="nav">
-					<li class="active"><a href="./dashboard.html"> <i
-							class="material-icons">dashboard</i>
-							<p>Dashboard</p>
-					</a></li>
-					<li><a data-toggle="collapse" href="#pagesOption"> <i
-							class="material-icons">image</i>
-							<p>
-								Pages <b class="caret"></b>
-							</p>
-					</a>
-						<div class="collapse" id="pagesOption">
-							<ul class="nav">
-								<li><a href="./pages/pricing.html"> <span
-										class="sidebar-mini"> U </span> <span class="sidebar-normal">
-											Users </span>
-								</a></li>
-							</ul>
-						</div></li>
-				</ul>
-			</div>
-		</div>
+		<div th:replace="fragments/sidebar :: sidebar"></div>
 		<div class="main-panel">
-			<nav class="navbar navbar-transparent navbar-absolute">
-				<div class="container-fluid">
-					<div class="navbar-minimize">
-						<button id="minimizeSidebar"
-							class="btn btn-round btn-white btn-fill btn-just-icon">
-							<i class="material-icons visible-on-sidebar-regular">more_vert</i>
-							<i class="material-icons visible-on-sidebar-mini">view_list</i>
-						</button>
-					</div>
-					<div class="navbar-header">
-						<button type="button" class="navbar-toggle" data-toggle="collapse">
-							<span class="sr-only">Toggle navigation</span> <span
-								class="icon-bar"></span> <span class="icon-bar"></span> <span
-								class="icon-bar"></span>
-						</button>
-						<a class="navbar-brand" href="#"> Dashboard </a>
-					</div>
-				</div>
-			</nav>
+			<div th:replace="fragments/navbar :: navbar"></div>
 			<div class="content">
 				<div class="container-fluid">
 					<div class="row">
@@ -147,44 +90,12 @@
 					</div>
 				</div>
 			</div>
-			<footer class="footer">
-				<div class="container-fluid">
-					<nav class="pull-left">
-						<ul>
-							<li><a href="#"> Home </a></li>
-						</ul>
-					</nav>
-					<p class="copyright pull-right">
-						&copy;
-						<script>
-							document.write(new Date().getFullYear())
-						</script>
-						<a href="#"> Copyright </a>
-					</p>
-				</div>
-			</footer>
+			<div th:replace="fragments/footer :: footer"></div>
 		</div>
 	</div>
 
 	<!-- Modal show chart -->
-	<div class="modal" tabindex="-1" role="dialog" id="showModal">
-		<div class="modal-dialog" role="document">
-			<div class="modal-content">
-				<div class="modal-header">
-					<div class="card-content">
-						<h4 class="card-title">
-							BenchMark
-						</h4>
-					</div>
-				</div>
-				<div class="modal-body" id="addBodyContent"></div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-secondary"
-						data-dismiss="modal" id="closeModalBtn">Close</button>
-				</div>
-			</div>
-		</div>
-	</div>
+	<div th:replace="fragments/modal :: modal"></div>
 
 </body>
 <!--   Core JS Files   -->

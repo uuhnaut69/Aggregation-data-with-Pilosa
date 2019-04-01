@@ -204,16 +204,16 @@ $(document).on('click', '.navbar-toggle', function() {
 });
 
 // activate collapse right menu when the windows is resized
-$(window).resize(function() {
-    md.initSidebarsCheck();
-
-    // reset the seq for charts drawing animations
-    seq = seq2 = 0;
-
-    setTimeout(function() {
-        demo.initDashboardPageCharts();
-    }, 500);
-});
+//$(window).resize(function() {
+//    md.initSidebarsCheck();
+//
+//    // reset the seq for charts drawing animations
+//    seq = seq2 = 0;
+//
+//    setTimeout(function() {
+//        demo.initDashboardPageCharts();
+//    }, 500);
+//});
 
 md = {
     misc: {
