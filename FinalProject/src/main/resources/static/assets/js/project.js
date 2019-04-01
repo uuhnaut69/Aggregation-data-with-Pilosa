@@ -1,5 +1,5 @@
 project = {
-    showSwal: function(type) {
+    showSwal: function(type, queryParam) {
 	    if (type == 'warning-message-and-confirmation') {
 	        swal({
 	            title: 'Are you sure?',
@@ -63,7 +63,7 @@ project = {
 	
 	},
 	
-	//Notification
+	// Notification
 	showNotification: function(from, align) {
         $.notify({
             icon: "notifications",

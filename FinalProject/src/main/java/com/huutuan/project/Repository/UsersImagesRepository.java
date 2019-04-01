@@ -12,4 +12,6 @@ import com.huutuan.project.Entity.AjaxRespModel;
 public interface UsersImagesRepository {
 
 	AjaxRespModel doBenchMark();
+	
+	AjaxRespModel singleBenchMark(int id);
 }

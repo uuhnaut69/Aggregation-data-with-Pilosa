@@ -123,7 +123,8 @@
 											<i class="material-icons">build</i> Fix Header!
 										</button>
 										<button class="btn btn-info" rel="tooltip"
-											data-placement="bottom" style="height: 38px;">
+											data-placement="bottom" style="height: 38px;"
+											th:onclick="'javascript:singleBenchMark(' + ${image.id} + ');'">
 											BenchMark
 											<div class="ripple-container"></div>
 										</button>
@@ -205,6 +206,7 @@
 			type : "GET",
 			dataType : "json",
 			url : '/doBenchMark',
+			contentType: 'application/json; charset=utf-8',
 			success : function(data) {
 				console.log("result", data);
 				var listLabel = [];
@@ -231,5 +233,38 @@
 			}
 		});
 	})
+	
+	function singleBenchMark(id){
+		$.ajax({
+			type : "GET",
+			url : '/singleBenchMark/'+ id,
+			contentType: 'application/json; charset=utf-8',
+			success : function(data) {
+				console.log("result", data);
+				var listLabel = [];
+				var listTotalLikes = [];
+				var listTotalShares = [];
+				if (data.list.length > 0) {
+					for (var i = 0; i < data.list.length; i++) {
+						listLabel.push(data.list[i][0]);
+						listTotalLikes
+								.push(data.list[i][1]);
+						listTotalShares
+								.push(data.list[i][2]);
+					}
+				}
+				$("#contentChart").remove();
+				var html = "";
+				html = '<div class="card" id="contentChart"><div class="card-header card-header-icon" data-background-color="rose"> <i class="material-icons">insert_chart</i> </div> <div class="card-content">'
+						+ '<h4 class="card-title">Likes, Shares Chart <small>- Bar Chart</small> </h4></div><div id="multipleBarsChart" class="ct-chart"></div><div class="tim-typo"><span class="text-primary" style="font-weight: bold; font-size: 1.4em;">Runtime: '
+						+ data.queryTime
+						+ 'ms</span> </div></div>';
+				$("#divChart").append(html);
+				project.initCharts(listLabel, listTotalLikes, listTotalShares);
+				project.showNotification('bottom','left');
+			}
+		});
+	}
+	
 </script>
 </html>
