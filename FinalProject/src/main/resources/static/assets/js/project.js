@@ -24,8 +24,8 @@ project = {
 	},
 
 	// function Init Chart
-	initCharts: function(listLabel,listTotalLikes,listTotalShares) {
-	    if ($('#multipleBarsChart').length != 0) {
+	initCharts: function(id,listLabel,listTotalLikes,listTotalShares) {
+	    if ($('#'+ id).length != 0) {
 	    	 var dataMultipleBarsChart = {
                  labels: listLabel,
                  series: [
@@ -50,7 +50,7 @@ project = {
                      }
                  }]
              ];
-             var multipleBarsChart = Chartist.Bar('#multipleBarsChart', dataMultipleBarsChart, optionsMultipleBarsChart, responsiveOptionsMultipleBarsChart);
+             var multipleBarsChart = Chartist.Bar('#'+ id, dataMultipleBarsChart, optionsMultipleBarsChart, responsiveOptionsMultipleBarsChart);
              // start animation for the Emails Subscription Chart
              md.startAnimationForBarChart(multipleBarsChart);
 	    }
@@ -65,7 +65,7 @@ project = {
 
         }, {
             type: 'success',
-            timer: 3000,
+            timer: 1500,
             placement: {
                 from: from,
                 align: align

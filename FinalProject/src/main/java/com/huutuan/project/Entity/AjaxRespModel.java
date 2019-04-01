@@ -7,20 +7,20 @@ import java.util.List;
  *
  */
 public class AjaxRespModel {
-	private List<LikeShare> list;
+	private List<?> list;
 	private Long queryTime;
 
 	/**
 	 * @return the list
 	 */
-	public List<LikeShare> getList() {
+	public List<?> getList() {
 		return list;
 	}
 
 	/**
 	 * @param list the list to set
 	 */
-	public void setList(List<LikeShare> list) {
+	public void setList(List<?> list) {
 		this.list = list;
 	}
 

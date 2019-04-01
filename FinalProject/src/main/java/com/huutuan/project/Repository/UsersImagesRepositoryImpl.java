@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.huutuan.project.Entity.AjaxRespModel;
-import com.huutuan.project.Entity.LikeShare;
 
 /**
  * @author uuhnaut
@@ -21,14 +20,13 @@ public class UsersImagesRepositoryImpl implements UsersImagesRepository {
 	@Autowired
 	EntityManager entityManager;
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public AjaxRespModel doBenchMark() {
 		try {
 			AjaxRespModel respModel = new AjaxRespModel();
 			Long startTime = new DateTime().getMillis();
 			String sql = "SELECT imageId, SUM(likes), SUM(shares) FROM users_images GROUP BY imageId";
-			List<LikeShare> list = entityManager.createNativeQuery(sql).getResultList();
+			List<?> list = entityManager.createNativeQuery(sql).getResultList();
 			Long endTime = new DateTime().getMillis();
 			Long runTime = endTime - startTime;
 			respModel.setList(list);
@@ -40,14 +38,13 @@ public class UsersImagesRepositoryImpl implements UsersImagesRepository {
 		}
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public AjaxRespModel singleBenchMark(int id) {
 		try {
 			AjaxRespModel respModel = new AjaxRespModel();
 			Long startTime = new DateTime().getMillis();
 			String sql = "SELECT imageId, SUM(likes), SUM(shares) FROM users_images WHERE imageId = ?";
-			List<LikeShare> list = entityManager.createNativeQuery(sql).setParameter(1, id).getResultList();
+			List<?> list = entityManager.createNativeQuery(sql).setParameter(1, id).getResultList();
 			Long endTime = new DateTime().getMillis();
 			Long runTime = endTime - startTime;
 			respModel.setList(list);
