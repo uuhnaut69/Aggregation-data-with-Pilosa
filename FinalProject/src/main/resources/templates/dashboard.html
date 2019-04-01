@@ -143,10 +143,8 @@
 				if (data.list.length > 0) {
 					for (var i = 0; i < data.list.length; i++) {
 						listLabel.push(data.list[i][0]);
-						listTotalLikes
-								.push(data.list[i][1]);
-						listTotalShares
-								.push(data.list[i][2]);
+						listTotalLikes.push(data.list[i][1]);
+						listTotalShares.push(data.list[i][2]);
 					}
 				}
 				$("#contentChart").remove();
@@ -173,9 +171,9 @@
 				var listTotalLikes = [];
 				var listTotalShares = [];
 				if (data.list.length > 0) {
-						listLabel.push(data.list[0][0]);
-						listTotalLikes.push(data.list[0][1]);
-						listTotalShares.push(data.list[0][2]);
+					listLabel.push(data.list[0][0]);
+					listTotalLikes.push(data.list[0][1]);
+					listTotalShares.push(data.list[0][2]);
 				}		
 				$("#modaContentChart").remove();
 				var html = "";
