@@ -15,6 +15,6 @@ public class VideoController {
 	@GetMapping("/videos")
 	public String getVideos(Model model) {
 		model.addAttribute("videos", videoRepository.findAll());
-		return "videos";
+		return "dashboard-video";
 	}
 }

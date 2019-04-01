@@ -9,7 +9,7 @@ import com.huutuan.project.Entity.AjaxRespModel;
  *
  */
 @Repository
-public interface UsersImagesRepository {
+public interface UsersVideosRepository {
 
 	public void doBenchMark(AjaxRespModel respModel);
 

@@ -15,8 +15,7 @@ import com.huutuan.project.Entity.AjaxRespModel;
  *
  */
 @Repository
-public class UsersImagesRepositoryImpl implements UsersImagesRepository {
-
+public class UsersVideosRepositoryImpl implements UsersVideosRepository {
 	@Autowired
 	EntityManager entityManager;
 
@@ -24,7 +23,7 @@ public class UsersImagesRepositoryImpl implements UsersImagesRepository {
 	public void doBenchMark(AjaxRespModel respModel) {
 		try {
 			Long startTime = new DateTime().getMillis();
-			String sql = "SELECT imageId, SUM(likes), SUM(shares) FROM users_images GROUP BY imageId";
+			String sql = "SELECT videoId, SUM(likes), SUM(shares) FROM users_videos GROUP BY videoId";
 			List<?> list = entityManager.createNativeQuery(sql).getResultList();
 			Long endTime = new DateTime().getMillis();
 			Long runTime = endTime - startTime;
@@ -40,7 +39,7 @@ public class UsersImagesRepositoryImpl implements UsersImagesRepository {
 	public void singleBenchMark(AjaxRespModel respModel, int id) {
 		try {
 			Long startTime = new DateTime().getMillis();
-			String sql = "SELECT imageId, SUM(likes), SUM(shares) FROM users_images WHERE imageId = ?";
+			String sql = "SELECT videoId, SUM(likes), SUM(shares) FROM users_videos WHERE videoId = ?";
 			List<?> list = entityManager.createNativeQuery(sql).setParameter(1, id).getResultList();
 			Long endTime = new DateTime().getMillis();
 			Long runTime = endTime - startTime;
