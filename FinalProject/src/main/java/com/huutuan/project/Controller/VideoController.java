@@ -7,6 +7,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 import com.huutuan.project.Repository.VideoRepository;
 
+/**
+ * @author uuhnaut
+ *
+ */
 @Controller
 public class VideoController {
 	@Autowired

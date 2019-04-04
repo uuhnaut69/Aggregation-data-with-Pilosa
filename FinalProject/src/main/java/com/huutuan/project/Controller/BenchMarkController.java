@@ -9,6 +9,10 @@ import com.huutuan.project.Entity.AjaxRespModel;
 import com.huutuan.project.Repository.UsersImagesRepository;
 import com.huutuan.project.Repository.UsersVideosRepository;
 
+/**
+ * @author uuhnaut
+ *
+ */
 @RestController
 public class BenchMarkController {
 
