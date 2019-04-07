@@ -2,16 +2,13 @@ package com.huutuan.project.Repository;
 
 import java.util.List;
 
-import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
-
-import com.huutuan.project.Entity.Image;
 
 /**
  * @author uuhnaut
  *
  */
 @Repository
-public interface ImageRepository extends CrudRepository<Image, Long> {
-	List<Image> findByTitle(String title);
+public interface ImageRepository {
+	public List<?> getData();
 }

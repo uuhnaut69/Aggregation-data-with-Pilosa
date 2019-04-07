@@ -55,30 +55,32 @@
 						<div class="col-md-4" style="margin-top: 50px;">
 							<div class="card card-product">
 								<div class="card-image" data-header-animation="true">
-									<a href="${image.title}"> <img class="img"
-										th:src="@{${image.url}}" style="height: 205px;">
+									<a href="${image[1]}"> <img class="img"
+										th:src="@{${image[3]}}" style="height: 205px;">
 									</a>
 								</div>
 								<div class="card-content" style="height: 144px">
 									<div class="card-actions">
 										<button class="btn btn-info" rel="tooltip"
 											data-placement="bottom" style="height: 38px;"
-											th:onclick="'javascript:singleBenchMark(' + ${image.id} + ');'">
+											th:onclick="'javascript:singleBenchMark(' + ${image[0]} + ');'">
 											BenchMark
 											<div class="ripple-container"></div>
 										</button>
 									</div>
 									<h4 class="card-title">
-										<a href="#${image.title}" th:text="${image.title}"></a>
+										<a href="#${image.title}" th:text="${image[1]}"></a>
 									</h4>
-									<div class="card-description" th:text="${image.description}"></div>
+									<div class="card-description" th:text="${image[2]}"></div>
 								</div>
 								<div class="card-footer">
 									<div class="stats">
-										<i class="fa fa-thumbs-up" aria-hidden="true"></i> 5.3k
+										<i class="fa fa-thumbs-up" aria-hidden="true"></i> <span
+											th:text="${image[4]}"></span>
 									</div>
 									<div class="stats">
-										<i class="fa fa-share-alt" aria-hidden="true"></i> 6.3k
+										<i class="fa fa-share-alt" aria-hidden="true"></i> <span
+											th:text="${image[5]}"></span>
 									</div>
 								</div>
 							</div>

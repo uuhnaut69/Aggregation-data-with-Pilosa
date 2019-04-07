@@ -1,15 +1,14 @@
 package com.huutuan.project.Repository;
 
-import org.springframework.data.repository.CrudRepository;
-import org.springframework.stereotype.Repository;
+import java.util.List;
 
-import com.huutuan.project.Entity.Video;
+import org.springframework.stereotype.Repository;
 
 /**
  * @author uuhnaut
  *
  */
 @Repository
-public interface VideoRepository extends CrudRepository<Video, Long> {
-
+public interface VideoRepository {
+	List<?> getData();
 }
