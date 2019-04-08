@@ -8,12 +8,12 @@ import java.util.List;
  */
 public class AjaxRespModel {
 	private List<Object[]> list;
-	private Long queryTime;
+	private Long mySqlQueryTime;
 
 	/**
 	 * @return the list
 	 */
-	public List<?> getList() {
+	public List<Object[]> getList() {
 		return list;
 	}
 
@@ -25,17 +25,17 @@ public class AjaxRespModel {
 	}
 
 	/**
-	 * @return the queryTime
+	 * @return the mySqlQueryTime
 	 */
-	public Long getQueryTime() {
-		return queryTime;
+	public Long getMySqlQueryTime() {
+		return mySqlQueryTime;
 	}
 
 	/**
-	 * @param queryTime the queryTime to set
+	 * @param mySqlQueryTime the mySqlQueryTime to set
 	 */
-	public void setQueryTime(Long queryTime) {
-		this.queryTime = queryTime;
+	public void setMySqlQueryTime(Long mySqlQueryTime) {
+		this.mySqlQueryTime = mySqlQueryTime;
 	}
 
 }

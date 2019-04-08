@@ -149,7 +149,7 @@
 				var html = "";
 				html = '<div class="card" id="contentChart"><div class="card-header card-header-icon" data-background-color="rose"> <i class="material-icons">insert_chart</i> </div> <div class="card-content">'
 						+ '<h4 class="card-title">Likes, Shares Chart <small>- Bar Chart</small> </h4></div><div id="mainChart" class="ct-chart"></div><div class="tim-typo"><span class="text-primary" style="font-weight: bold; font-size: 1.4em;">Runtime: '
-						+ data.queryTime
+						+ data.mySqlQueryTime
 						+ 'ms</span> </div></div>';
 				$("#divChart").append(html);
 				project.initCharts("mainChart",listLabel, listTotalLikes, listTotalShares);
@@ -177,7 +177,7 @@
 				var html = "";
 				html = '<div class="card" id="modaContentChart"><div class="card-header card-header-icon" data-background-color="rose"> <i class="material-icons">insert_chart</i> </div> <div class="card-content">'
 						+ '<h4 class="card-title">Likes, Shares Chart <small>- Bar Chart</small> </h4></div><div id="modalChart" class="ct-chart"></div><div class="tim-typo"><span class="text-primary" style="font-weight: bold; font-size: 1.4em;">Runtime: '
-						+ data.queryTime
+						+ data.mySqlQueryTime
 						+ 'ms</span> </div></div>';
 				$("#addBodyContent").append(html);
 				project.initCharts("modalChart",listLabel, listTotalLikes, listTotalShares);

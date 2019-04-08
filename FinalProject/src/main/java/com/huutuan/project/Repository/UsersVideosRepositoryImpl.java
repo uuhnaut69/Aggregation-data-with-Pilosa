@@ -29,7 +29,7 @@ public class UsersVideosRepositoryImpl implements UsersVideosRepository {
 			Long endTime = new DateTime().getMillis();
 			Long runTime = endTime - startTime;
 			respModel.setList(list);
-			respModel.setQueryTime(runTime);
+			respModel.setMySqlQueryTime(runTime);
 			System.out.println(respModel);
 		} catch (Exception e) {
 			throw e;
@@ -46,7 +46,7 @@ public class UsersVideosRepositoryImpl implements UsersVideosRepository {
 			Long endTime = new DateTime().getMillis();
 			Long runTime = endTime - startTime;
 			respModel.setList(list);
-			respModel.setQueryTime(runTime);
+			respModel.setMySqlQueryTime(runTime);
 			System.out.println(respModel);
 		} catch (Exception e) {
 			throw e;
