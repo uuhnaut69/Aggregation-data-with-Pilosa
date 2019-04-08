@@ -7,7 +7,7 @@ import java.util.List;
  *
  */
 public class AjaxRespModel {
-	private List<?> list;
+	private List<Object[]> list;
 	private Long queryTime;
 
 	/**
@@ -20,7 +20,7 @@ public class AjaxRespModel {
 	/**
 	 * @param list the list to set
 	 */
-	public void setList(List<?> list) {
+	public void setList(List<Object[]> list) {
 		this.list = list;
 	}
 

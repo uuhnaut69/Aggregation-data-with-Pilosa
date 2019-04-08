@@ -65,12 +65,26 @@ project = {
 
         }, {
             type: 'success',
-            timer: 1500,
+            timer: 1000,
             placement: {
                 from: from,
                 align: align
             }
         });
-    }
+    },
+    //limit string
+    textTruncate : function(str, length, ending) {
+        if (length == null) {
+          length = 100;
+        }
+        if (ending == null) {
+          ending = '...';
+        }
+        if (str.length > length) {
+          return str.substring(0, length - ending.length) + ending;
+        } else {
+          return str;
+        }
+      }
 
 }

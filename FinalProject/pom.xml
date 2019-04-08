@@ -70,6 +70,13 @@
 			<artifactId>joda-time</artifactId>
 			<version>2.10.1</version>
 		</dependency>
+
+		<!-- Pilosa -->
+		<dependency>
+			<groupId>com.pilosa</groupId>
+			<artifactId>pilosa-client</artifactId>
+			<version>1.2.0</version>
+		</dependency>
 	</dependencies>
 
 	<build>

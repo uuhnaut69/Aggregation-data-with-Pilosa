@@ -10,5 +10,5 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface ImageRepository {
-	public List<?> getData();
+	public List<Object[]> getData();
 }

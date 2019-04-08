@@ -17,10 +17,11 @@ public class ImageRepositoryImpl implements ImageRepository {
 	EntityManager entityManager;
 
 	@Override
-	public List<?> getData() {
+	@SuppressWarnings("unchecked")
+	public List<Object[]> getData() {
 		try {
-			String sql = "SELECT image.id,image.title, image.description, image.url,SUM(likes),SUM(shares) FROM image left join users_images on users_images.imageId = image.id group by image.id;";
-			List<?> list = entityManager.createNativeQuery(sql).getResultList();
+			String sql = "SELECT image.id,image.title, image.description, image.url,SUM(likes),SUM(shares) FROM image left join users_images on users_images.imageId = image.id group by image.id";
+			List<Object[]> list = entityManager.createNativeQuery(sql).getResultList();
 			return list;
 		} catch (Exception e) {
 			throw e;

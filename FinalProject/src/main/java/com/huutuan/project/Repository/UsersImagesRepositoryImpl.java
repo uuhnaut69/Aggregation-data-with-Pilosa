@@ -21,11 +21,12 @@ public class UsersImagesRepositoryImpl implements UsersImagesRepository {
 	EntityManager entityManager;
 
 	@Override
+	@SuppressWarnings("unchecked")
 	public void doBenchMark(AjaxRespModel respModel) {
 		try {
 			Long startTime = new DateTime().getMillis();
-			String sql = "SELECT imageId, SUM(likes), SUM(shares) FROM users_images GROUP BY imageId";
-			List<?> list = entityManager.createNativeQuery(sql).getResultList();
+			String sql = "SELECT image.title, SUM(likes), SUM(shares) FROM image left join users_images on users_images.imageId = image.id group by image.id";
+			List<Object[]> list = entityManager.createNativeQuery(sql).getResultList();
 			Long endTime = new DateTime().getMillis();
 			Long runTime = endTime - startTime;
 			respModel.setList(list);
@@ -37,11 +38,12 @@ public class UsersImagesRepositoryImpl implements UsersImagesRepository {
 	}
 
 	@Override
+	@SuppressWarnings("unchecked")
 	public void singleBenchMark(AjaxRespModel respModel, int id) {
 		try {
 			Long startTime = new DateTime().getMillis();
-			String sql = "SELECT imageId, SUM(likes), SUM(shares) FROM users_images WHERE imageId = ?";
-			List<?> list = entityManager.createNativeQuery(sql).setParameter(1, id).getResultList();
+			String sql = "SELECT image.title, SUM(likes), SUM(shares) FROM image left join users_images on users_images.imageId = image.id WHERE users_images.imageId = ?";
+			List<Object[]> list = entityManager.createNativeQuery(sql).setParameter(1, id).getResultList();
 			Long endTime = new DateTime().getMillis();
 			Long runTime = endTime - startTime;
 			respModel.setList(list);

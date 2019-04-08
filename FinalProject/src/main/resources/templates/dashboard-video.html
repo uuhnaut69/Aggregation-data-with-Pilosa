@@ -66,17 +66,17 @@
 											allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
 											allowfullscreen></iframe>
 									</div>
+									<div class="text-center">
+										<button
+											th:onclick="'javascript:singleBenchMark(' + ${video[0]} + ');'"
+											class="btn btn-info">BenchMark</button>
+									</div>
 								</div>
 								<div class="card-footer">
 									<div class="stats">
 										<i class="fa fa-thumbs-up" aria-hidden="true"></i> <span
 											th:text="${video[3]}"></span> <i class="fa fa-share-alt"
 											aria-hidden="true"></i> <span th:text="${video[4]}"></span>
-									</div>
-									<div>
-										<button
-											th:onclick="'javascript:singleBenchMark(' + ${video[0]} + ');'"
-											class="btn btn-info">BenchMark</button>
 									</div>
 								</div>
 							</div>

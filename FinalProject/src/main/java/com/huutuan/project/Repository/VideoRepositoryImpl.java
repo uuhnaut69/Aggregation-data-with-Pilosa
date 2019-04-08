@@ -17,10 +17,11 @@ public class VideoRepositoryImpl implements VideoRepository {
 	EntityManager entityManager;
 
 	@Override
-	public List<?> getData() {
+	@SuppressWarnings("unchecked")
+	public List<Object[]> getData() {
 		try {
-			String sql = "SELECT video.id,video.title,  video.url,SUM(likes), SUM(shares) FROM video left join users_videos on users_videos.videoId = video.id group by video.id;";
-			List<?> list = entityManager.createNativeQuery(sql).getResultList();
+			String sql = "SELECT video.id,video.title,  video.url,SUM(likes), SUM(shares) FROM video left join users_videos on users_videos.videoId = video.id group by video.id";
+			List<Object[]> list = entityManager.createNativeQuery(sql).getResultList();
 			return list;
 		} catch (Exception e) {
 			throw e;

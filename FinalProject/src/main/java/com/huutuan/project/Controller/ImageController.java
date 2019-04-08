@@ -19,6 +19,6 @@ public class ImageController {
 	@GetMapping("/")
 	public String getData(Model model) {
 		model.addAttribute("images", imageRepository.getData());
-		return "dashboard";
+		return "dashboard-image";
 	}
 }
