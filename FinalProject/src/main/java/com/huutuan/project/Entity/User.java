@@ -1,6 +1,8 @@
 package com.huutuan.project.Entity;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.validation.constraints.NotBlank;
 
@@ -12,20 +14,12 @@ import javax.validation.constraints.NotBlank;
 public class User {
 
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	@NotBlank(message = "Name is mandatory")
 	private String name;
 
 	private int age;
-
-	public User() {
-	}
-
-	public User(int id, String name, int age) {
-		this.id = id;
-		this.name = name;
-		this.age = age;
-	}
 
 	/**
 	 * @return the id
@@ -69,8 +63,4 @@ public class User {
 		this.age = age;
 	}
 
-	@Override
-	public String toString() {
-		return "User{" + "id=" + id + ", name=" + name + ", age=" + age + '}';
-	}
 }
