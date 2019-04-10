@@ -10,12 +10,13 @@ import javax.persistence.Id;
  *
  */
 @Entity
-public class VideoEntry {
+public class UserEntry {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	private String url;
-	private String title;
+	private String name;
+
+	private int age;
 
 	/**
 	 * @return the id
@@ -32,31 +33,30 @@ public class VideoEntry {
 	}
 
 	/**
-	 * @return the url
+	 * @return the name
 	 */
-	public String getUrl() {
-		return url;
+	public String getName() {
+		return name;
 	}
 
 	/**
-	 * @param url the url to set
+	 * @param name the name to set
 	 */
-	public void setUrl(String url) {
-		this.url = url;
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	/**
-	 * @return the title
+	 * @return the age
 	 */
-	public String getTitle() {
-		return title;
+	public int getAge() {
+		return age;
 	}
 
 	/**
-	 * @param title the title to set
+	 * @param age the age to set
 	 */
-	public void setTitle(String title) {
-		this.title = title;
+	public void setAge(int age) {
+		this.age = age;
 	}
-
 }

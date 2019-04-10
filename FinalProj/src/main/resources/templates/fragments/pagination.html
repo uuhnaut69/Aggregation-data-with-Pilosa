@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<link th:href="@{../../../assets/css/material-dashboard.css}"
+	rel="stylesheet" />
+</head>
+<body>
+	<div th:fragment="pagination" class="text-center">
+		<ul class="pagination pagination-info">
+			<li class="page-item"><a
+				th:href="@{/videos(pageNo=${prevPage}, pageSize=${pageSize})}"
+				class="page-link"> prev</a></li>
+			<li th:class="${pageNo==pageNo} ? active" class="page-item"><a
+				th:href="@{/videos(pageNo=${pageNo}, pageSize=${pageSize})}"
+				class="page-link" th:text="${pageNo}"></a></li>
+			<li th:class="${pageNo==pageNo + 1} ? active" class="page-item"><a
+				th:href="@{/videos(pageNo=${pageNo+1}, pageSize=${pageSize})}"
+				class="page-link" th:text="${pageNo+1}"></a></li>
+			<li th:class="${pageNo==pageNo + 2} ? active" class="page-item"><a
+				th:href="@{/videos(pageNo=${pageNo+2}, pageSize=${pageSize})}"
+				class="page-link" th:text="${pageNo+2}"></a></li>
+			<li th:class="${pageNo==pageNo + 3} ? active" class="page-item"><a
+				th:href="@{/videos(pageNo=${pageNo+3}, pageSize=${pageSize})}"
+				class="page-link" th:text="${pageNo+3}"></a></li>
+			<li th:class="${pageNo==pageNo + 4} ? active" class="page-item"><a
+				th:href="@{/videos(pageNo=${pageNo+4}, pageSize=${pageSize})}"
+				class="page-link" th:text="${pageNo+4}"></a></li>
+			<li class="page-item"><a
+				th:href="@{/videos(pageNo=${nextPage}, pageSize=${pageSize})}"
+				class="page-link">next </a></li>
+		</ul>
+	</div>
+</body>
+</html>

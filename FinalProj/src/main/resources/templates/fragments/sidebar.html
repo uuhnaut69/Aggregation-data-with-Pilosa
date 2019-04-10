@@ -9,7 +9,7 @@
 		data-background-color="black"
 		data-image="../../assets/img/sidebar-1.jpg">
 		<div class="logo">
-			<a href="#" class="simple-text logo-mini"> DB </a> <a href="#"
+			<a th:href="@{/videos}" class="simple-text logo-mini"> DB </a> <a th:href="@{/videos}"
 				class="simple-text logo-normal"> DashBoard </a>
 		</div>
 		<div class="sidebar-wrapper">
@@ -24,7 +24,7 @@
 				</div>
 			</div>
 			<ul class="nav">
-				<li class="active"><a href="/"> <i
+				<li class="active"><a th:href="@{/videos}"> <i
 						class="material-icons">dashboard</i>
 						<p>Dashboard</p>
 				</a></li>

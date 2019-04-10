@@ -51,29 +51,34 @@
 							</div>
 						</div>
 					</div>
+					<div style="font-weight: bold;">
+						Showing <span th:text="${fromRecord}"></span> to <span
+							th:text="${toRecord}"></span> of <span th:text="${totalRecord}"></span>
+						entries
+					</div>
 					<div th:each="image : ${images}">
 						<div class="col-md-4" style="margin-top: 50px;">
 							<div class="card card-product">
 								<div class="card-image" data-header-animation="true">
-									<a href="${image[1]}"> <img class="img"
-										th:src="@{${image[3]}}" style="height: 205px;">
+									<a href="${image.title}"> <img class="img"
+										th:src="@{${image.url}}" style="height: 205px;">
 									</a>
 								</div>
 								<div class="card-content" style="height: 144px">
 									<div class="card-actions">
 										<button class="btn btn-info" rel="tooltip"
 											data-placement="bottom" style="height: 38px;"
-											th:onclick="'javascript:singleBenchMark(' + ${image[0]} + ');'">
+											th:onclick="'javascript:singleBenchMark(' + ${image.id} + ');'">
 											BenchMark
 											<div class="ripple-container"></div>
 										</button>
 									</div>
 									<h4 class="card-title">
-										<a href="#${image.title}" th:text="${image[1]}"></a>
+										<a href="#${image.title}" th:text="${image.title}"></a>
 									</h4>
-									<div class="card-description" th:text="${image[2]}"></div>
+									<div class="card-description" th:text="${image.description}"></div>
 								</div>
-								<div class="card-footer">
+								<!-- <div class="card-footer">
 									<div class="stats">
 										<i class="fa fa-thumbs-up" aria-hidden="true"></i> <span
 											th:text="${image[4]}"></span>
@@ -82,10 +87,11 @@
 										<i class="fa fa-share-alt" aria-hidden="true"></i> <span
 											th:text="${image[5]}"></span>
 									</div>
-								</div>
+								</div> -->
 							</div>
 						</div>
 					</div>
+					<!-- <div th:replace="fragments/pagination :: pagination"></div> -->
 				</div>
 			</div>
 			<div th:replace="fragments/footer :: footer"></div>

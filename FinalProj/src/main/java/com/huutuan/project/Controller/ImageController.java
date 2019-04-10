@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.huutuan.project.Entity.BaseRespModel;
-import com.huutuan.project.Entity.VideoEntry;
-import com.huutuan.project.Repository.VideoRepository;
+import com.huutuan.project.Entity.ImageEntry;
+import com.huutuan.project.Repository.ImageRepository;
 import com.huutuan.project.Utils.PagingUtils;
 
 /**
@@ -21,32 +21,32 @@ import com.huutuan.project.Utils.PagingUtils;
  *
  */
 @Controller
-public class VideoController {
+public class ImageController {
 	@Autowired
-	private VideoRepository videoRepository;
+	private ImageRepository imageRepository;
 
-	@GetMapping("/videos")
-	public String getVideos(Model model,
+	@GetMapping("/images")
+	public String getimages(Model model,
 			@RequestParam(value = "pageNo", required = false, defaultValue = "1") int pageNo,
 			@RequestParam(value = "pageSize", required = false, defaultValue = "10") int pageSize) {
 		BaseRespModel baseModel = new BaseRespModel();
 		Pageable pageRequest = PageRequest.of(pageNo, pageSize);
-		Page<VideoEntry> pageVideo = videoRepository.findAll(pageRequest);
-		baseModel.setTotalRecord(pageVideo.getTotalElements());
+		Page<ImageEntry> pageImage = imageRepository.findAll(pageRequest);
+		baseModel.setTotalRecord(pageImage.getTotalElements());
 		baseModel.setPageNo(pageNo);
 		baseModel.setPageSize(pageSize);
-		List<VideoEntry> listVideo = pageVideo.getContent();
+		List<ImageEntry> listImage = pageImage.getContent();
 
 		// caculate Page Index
 		PagingUtils.calculateIndexInPage(baseModel);
-		model.addAttribute("videos", listVideo);
+		model.addAttribute("images", listImage);
 		model.addAttribute("totalRecord", baseModel.getTotalRecord());
 		model.addAttribute("pageNo", baseModel.getPageNo());
 		model.addAttribute("pageSize", baseModel.getPageSize());
 		model.addAttribute("fromRecord", baseModel.getFromRecord());
 		model.addAttribute("toRecord", baseModel.getToRecord());
-		model.addAttribute("prevPage", pageVideo.previousPageable().getPageNumber());
-		model.addAttribute("nextPage", pageVideo.nextPageable().getPageNumber());
-		return "dashboard-video";
+//		model.addAttribute("prevPage", pageImage.previousPageable().getPageNumber());
+//		model.addAttribute("nextPage", pageImage.nextPageable().getPageNumber());
+		return "dashboard-image";
 	}
 }
