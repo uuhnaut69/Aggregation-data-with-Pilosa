@@ -60,30 +60,30 @@
 						<div class="col-md-6">
 							<div class="card">
 								<div class="card-header" style="margin-bottom: 40px;">
-									<h4 class="card-title" th:text=${video.title} style="display:block;text-overflow: ellipsis;width: 490px;overflow: hidden; white-space: nowrap;"></h4>
+									<h4 class="card-title" th:text=${video[1]} style="display:block;text-overflow: ellipsis;width: 490px;overflow: hidden; white-space: nowrap;"></h4>
 								</div>
 								<div class="card-body" style="margin-bottom: 15px">
 									<div class="card-image text-center"
 										style="background-color: black;">
 										<iframe
-											th:src="@{'https://www.youtube.com/embed/' + ${video.url}}"
+											th:src="@{'https://www.youtube.com/embed/' + ${video[2]}}"
 											frameborder="0"
 											allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
 											allowfullscreen></iframe>
 									</div>
 									<div class="text-center">
 										<button
-											th:onclick="'javascript:singleBenchMark(' + ${video.id} + ');'"
+											th:onclick="'javascript:singleBenchMark(' + ${video[0]} + ');'"
 											class="btn btn-info">BenchMark</button>
 									</div>
 								</div>
-								<!-- <div class="card-footer">
+								<div class="card-footer">
 									<div class="stats">
 										<i class="fa fa-thumbs-up" aria-hidden="true"></i> <span
 											th:text="${video[3]}"></span> <i class="fa fa-share-alt"
 											aria-hidden="true"></i> <span th:text="${video[4]}"></span>
 									</div>
-								</div> -->
+								</div>
 							</div>
 						</div>
 					</div>

@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.huutuan.project.Entity.BaseRespModel;
-import com.huutuan.project.Entity.VideoEntry;
 import com.huutuan.project.Repository.VideoRepository;
 import com.huutuan.project.Utils.PagingUtils;
 
@@ -31,11 +30,11 @@ public class VideoController {
 			@RequestParam(value = "pageSize", required = false, defaultValue = "10") int pageSize) {
 		BaseRespModel baseModel = new BaseRespModel();
 		Pageable pageRequest = PageRequest.of(pageNo, pageSize);
-		Page<VideoEntry> pageVideo = videoRepository.findAll(pageRequest);
+		Page<Object[]> pageVideo = videoRepository.getData(pageRequest);
 		baseModel.setTotalRecord(pageVideo.getTotalElements());
 		baseModel.setPageNo(pageNo);
 		baseModel.setPageSize(pageSize);
-		List<VideoEntry> listVideo = pageVideo.getContent();
+		List<Object[]> listVideo = pageVideo.getContent();
 
 		// caculate Page Index
 		PagingUtils.calculateIndexInPage(baseModel);
