@@ -39,7 +39,8 @@
 									<div>
 										<div class="row">
 											<div class="col-md-3">
-												<button class="btn btn-info" id="benchMarkBtn">
+												<button class="btn btn-info"
+													th:onclick="'javascript:doBenchMark(' + ${pageNo} + ',' + ${pageSize} + ');'">
 													BenchMark
 													<div class="ripple-container"></div>
 												</button>
@@ -133,11 +134,11 @@
 <script th:src="@{../assets/js/project.js}"></script>
 
 <script type="text/javascript">
-	$("#benchMarkBtn").click(function() {
+	function doBenchMark(pageNo,pageSize){
 		$.ajax({
 			type : "GET",
 			dataType : "json",
-			url : '/doBenchMark/2',
+			url : '/doBenchMark/2/'+pageNo + '/'+pageSize,
 			contentType: 'application/json; charset=utf-8',
 			success : function(data) {
 				console.log("result", data);
@@ -146,23 +147,23 @@
 				var listTotalShares = [];
 				if (data.list.length > 0) {
 					for (var i = 0; i < data.list.length; i++) {
-						listLabel.push(data.list[i][0]);
-						listTotalLikes.push(data.list[i][1]);
-						listTotalShares.push(data.list[i][2]);
+						listLabel.push(data.list[i][1]);
+						listTotalLikes.push(data.list[i][3]);
+						listTotalShares.push(data.list[i][4]);
 					}
 				}
 				$("#contentChart").remove();
 				var html = "";
 				html = '<div class="card" id="contentChart"><div class="card-header card-header-icon" data-background-color="rose"> <i class="material-icons">insert_chart</i> </div> <div class="card-content">'
 						+ '<h4 class="card-title">Likes, Shares Chart <small>- Bar Chart</small> </h4></div><div id="mainChart" class="ct-chart"></div><div class="tim-typo"><span class="text-primary" style="font-weight: bold; font-size: 1.4em;">Runtime: '
-						+ data.mySqlQueryTime
+						+ data.mysqlRunTime
 						+ 'ms</span> </div></div>';
 				$("#divChart").append(html);
 				project.initCharts("mainChart",listLabel, listTotalLikes, listTotalShares);
 				project.showNotification('bottom','left');
 			}
 		});
-	})
+	}
 	
 	function singleBenchMark(id){
 		$.ajax({
@@ -175,15 +176,15 @@
 				var listTotalLikes = [];
 				var listTotalShares = [];
 				if (data.list.length > 0) {
-					listLabel.push(data.list[0][0]);
-					listTotalLikes.push(data.list[0][1]);
-					listTotalShares.push(data.list[0][2]);
+					listLabel.push(data.list[0][1]);
+					listTotalLikes.push(data.list[0][3]);
+					listTotalShares.push(data.list[0][4]);
 				}		
 				$("#modaContentChart").remove();
 				var html = "";
 				html = '<div class="card" id="modaContentChart"><div class="card-header card-header-icon" data-background-color="rose"> <i class="material-icons">insert_chart</i> </div> <div class="card-content">'
 						+ '<h4 class="card-title">Likes, Shares Chart <small>- Bar Chart</small> </h4></div><div id="modalChart" class="ct-chart"></div><div class="tim-typo"><span class="text-primary" style="font-weight: bold; font-size: 1.4em;">Runtime: '
-						+ data.mySqlQueryTime
+						+ data.mysqlRunTime
 						+ 'ms</span> </div></div>';
 				$("#addBodyContent").append(html);
 				project.initCharts("modalChart",listLabel, listTotalLikes, listTotalShares);
