@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.huutuan.project.Entity.BaseRespModel;
-import com.huutuan.project.Entity.ImageEntry;
 import com.huutuan.project.Repository.ImageRepository;
 import com.huutuan.project.Utils.PagingUtils;
 
@@ -26,16 +25,16 @@ public class ImageController {
 	private ImageRepository imageRepository;
 
 	@GetMapping("/images")
-	public String getimages(Model model,
+	public String getImages(Model model,
 			@RequestParam(value = "pageNo", required = false, defaultValue = "1") int pageNo,
 			@RequestParam(value = "pageSize", required = false, defaultValue = "10") int pageSize) {
 		BaseRespModel baseModel = new BaseRespModel();
-		Pageable pageRequest = PageRequest.of(pageNo, pageSize);
-		Page<ImageEntry> pageImage = imageRepository.findAll(pageRequest);
+		Pageable pageRequest = PageRequest.of(0, pageSize);
+		Page<Object[]> pageImage = imageRepository.getData(pageRequest);
 		baseModel.setTotalRecord(pageImage.getTotalElements());
 		baseModel.setPageNo(pageNo);
 		baseModel.setPageSize(pageSize);
-		List<ImageEntry> listImage = pageImage.getContent();
+		List<Object[]> listImage = pageImage.getContent();
 
 		// caculate Page Index
 		PagingUtils.calculateIndexInPage(baseModel);

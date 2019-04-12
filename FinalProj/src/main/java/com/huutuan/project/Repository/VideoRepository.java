@@ -17,11 +17,10 @@ import com.huutuan.project.Entity.VideoEntry;
  */
 @Repository
 public interface VideoRepository extends JpaRepository<VideoEntry, Long> {
-	Page<VideoEntry> findAll(Pageable pageable);
 
-	@Query(value = "SELECT VIDEO_ENTRY.video_id, VIDEO_ENTRY.title,  VIDEO_ENTRY.url, SUM(USER_VIDEO.likes) as totalLikes, SUM(USER_VIDEO.shares) as totalShares FROM VIDEO_ENTRY LEFT JOIN USER_VIDEO ON USER_VIDEO.video_id = VIDEO_ENTRY.video_id GROUP BY VIDEO_ENTRY.video_id", countQuery = "SELECT count(*) FROM VIDEO_ENTRY", nativeQuery = true)
+	@Query(value = "SELECT VIDEO_ENTRY.video_id, VIDEO_ENTRY.title,  VIDEO_ENTRY.url, SUM(USER_VIDEO.likes), SUM(USER_VIDEO.shares) FROM VIDEO_ENTRY LEFT JOIN USER_VIDEO ON USER_VIDEO.video_id = VIDEO_ENTRY.video_id GROUP BY VIDEO_ENTRY.video_id", countQuery = "SELECT count(*) FROM VIDEO_ENTRY", nativeQuery = true)
 	Page<Object[]> getData(Pageable pageable);
 
-	@Query(value = "SELECT VIDEO_ENTRY.video_id, VIDEO_ENTRY.title,  VIDEO_ENTRY.url, SUM(USER_VIDEO.likes) as totalLikes, SUM(USER_VIDEO.shares) as totalShares FROM VIDEO_ENTRY LEFT JOIN USER_VIDEO ON USER_VIDEO.video_id = VIDEO_ENTRY.video_id WHERE USER_VIDEO.video_id = :id", nativeQuery = true)
+	@Query(value = "SELECT VIDEO_ENTRY.video_id, VIDEO_ENTRY.title,  VIDEO_ENTRY.url, SUM(USER_VIDEO.likes), SUM(USER_VIDEO.shares) FROM VIDEO_ENTRY LEFT JOIN USER_VIDEO ON USER_VIDEO.video_id = VIDEO_ENTRY.video_id WHERE USER_VIDEO.video_id = :id", nativeQuery = true)
 	List<Object[]> getOne(@Param("id") int id);
 }

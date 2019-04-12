@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.huutuan.project.Entity.AjaxRespModel;
+import com.huutuan.project.Repository.ImageRepository;
 import com.huutuan.project.Repository.VideoRepository;
 
 /**
@@ -22,6 +23,8 @@ import com.huutuan.project.Repository.VideoRepository;
 public class BenchMarkController {
 	@Autowired
 	private VideoRepository videoRepository;
+	@Autowired
+	private ImageRepository imageRepository;
 
 	@GetMapping("/doBenchMark/{type}/{pageNo}/{pageSize}")
 	public AjaxRespModel doBenchMark(@PathVariable int type, @PathVariable int pageNo, @PathVariable int pageSize) {
@@ -29,7 +32,14 @@ public class BenchMarkController {
 		Pageable pageRequest = PageRequest.of(pageNo, pageSize);
 //	type = 1: image bm, type = 2: video bm
 		if (type == 1) {
-//			usersImagesRepository.doBenchMark(respModel);
+			Pageable test = PageRequest.of(0, pageSize);
+			long mysqlStart = new DateTime().getMillis();
+			Page<Object[]> pageImage = imageRepository.getData(test);
+			long mysqlEnd = new DateTime().getMillis();
+			long mysqlRuntime = mysqlEnd - mysqlStart;
+			List<Object[]> listImage = pageImage.getContent();
+			respModel.setList(listImage);
+			respModel.setMysqlRunTime(mysqlRuntime);
 		} else if (type == 2) {
 			long mysqlStart = new DateTime().getMillis();
 			Page<Object[]> pageVideo = videoRepository.getData(pageRequest);
@@ -47,7 +57,12 @@ public class BenchMarkController {
 		AjaxRespModel respModel = new AjaxRespModel();
 		// type = 1: single image bm, type = 2: single video bm
 		if (type == 1) {
-//			usersImagesRepository.singleBenchMark(respModel, id);
+			long mysqlStart = new DateTime().getMillis();
+			List<Object[]> listImage = imageRepository.getOne(id);
+			long mysqlEnd = new DateTime().getMillis();
+			long mysqlRuntime = mysqlEnd - mysqlStart;
+			respModel.setList(listImage);
+			respModel.setMysqlRunTime(mysqlRuntime);
 		} else if (type == 2) {
 			long mysqlStart = new DateTime().getMillis();
 			List<Object[]> listVideo = videoRepository.getOne(id);
