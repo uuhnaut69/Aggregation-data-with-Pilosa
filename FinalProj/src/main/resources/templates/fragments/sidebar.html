@@ -9,8 +9,9 @@
 		data-background-color="black"
 		data-image="../../assets/img/sidebar-1.jpg">
 		<div class="logo">
-			<a th:href="@{/videos}" class="simple-text logo-mini"> DB </a> <a th:href="@{/videos}"
-				class="simple-text logo-normal"> DashBoard </a>
+			<a th:href="@{/}" class="simple-text logo-mini"> DB </a> <a
+				th:href="@{/}" class="simple-text logo-normal"> DashBoard
+			</a>
 		</div>
 		<div class="sidebar-wrapper">
 			<div class="user">
@@ -24,23 +25,10 @@
 				</div>
 			</div>
 			<ul class="nav">
-				<li class="active"><a th:href="@{/videos}"> <i
+				<li class="active"><a th:href="@{/}"> <i
 						class="material-icons">dashboard</i>
 						<p>Dashboard</p>
 				</a></li>
-				<li><a data-toggle="collapse" href="#pagesOption"> <i
-						class="material-icons">image</i>
-						<p>
-							Pages <b class="caret"></b>
-						</p>
-				</a>
-					<div class="collapse" id="pagesOption">
-						<ul class="nav">
-							<li><a href="/images"> <span class="sidebar-mini">
-										I </span> <span class="sidebar-normal"> Images </span>
-							</a></li>
-						</ul>
-					</div></li>
 			</ul>
 		</div>
 	</div>

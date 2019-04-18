@@ -22,13 +22,18 @@ public class UserEntry {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "user_id")
 	private int id;
+	@Column(name = "uuid")
+	private int uuid;
 	@Column(name = "name")
 	private String name;
-	@Column(name = "age")
-	private int age;
-
-	@OneToMany(mappedBy = "userentry")
-	private Set<UserVideo> uservideo;
+	@Column(name = "created_utc")
+	private int createdDate;
+	@Column(name = "updated_on")
+	private int updatedDate;
+	@Column(name = "comment_karma")
+	private int commentKarma;
+	@Column(name = "link_karma")
+	private int linkKarma;
 
 	@OneToMany(mappedBy = "imageentry")
 	private Set<UserImage> userimage;
@@ -48,6 +53,20 @@ public class UserEntry {
 	}
 
 	/**
+	 * @return the uuid
+	 */
+	public int getUuid() {
+		return uuid;
+	}
+
+	/**
+	 * @param uuid the uuid to set
+	 */
+	public void setUuid(int uuid) {
+		this.uuid = uuid;
+	}
+
+	/**
 	 * @return the name
 	 */
 	public String getName() {
@@ -62,31 +81,59 @@ public class UserEntry {
 	}
 
 	/**
-	 * @return the age
+	 * @return the createdDate
 	 */
-	public int getAge() {
-		return age;
+	public int getCreatedDate() {
+		return createdDate;
 	}
 
 	/**
-	 * @param age the age to set
+	 * @param createdDate the createdDate to set
 	 */
-	public void setAge(int age) {
-		this.age = age;
+	public void setCreatedDate(int createdDate) {
+		this.createdDate = createdDate;
 	}
 
 	/**
-	 * @return the uservideo
+	 * @return the updatedDate
 	 */
-	public Set<UserVideo> getUservideo() {
-		return uservideo;
+	public int getUpdatedDate() {
+		return updatedDate;
 	}
 
 	/**
-	 * @param uservideo the uservideo to set
+	 * @param updatedDate the updatedDate to set
 	 */
-	public void setUservideo(Set<UserVideo> uservideo) {
-		this.uservideo = uservideo;
+	public void setUpdatedDate(int updatedDate) {
+		this.updatedDate = updatedDate;
+	}
+
+	/**
+	 * @return the commentKarma
+	 */
+	public int getCommentKarma() {
+		return commentKarma;
+	}
+
+	/**
+	 * @param commentKarma the commentKarma to set
+	 */
+	public void setCommentKarma(int commentKarma) {
+		this.commentKarma = commentKarma;
+	}
+
+	/**
+	 * @return the linkKarma
+	 */
+	public int getLinkKarma() {
+		return linkKarma;
+	}
+
+	/**
+	 * @param linkKarma the linkKarma to set
+	 */
+	public void setLinkKarma(int linkKarma) {
+		this.linkKarma = linkKarma;
 	}
 
 	/**
