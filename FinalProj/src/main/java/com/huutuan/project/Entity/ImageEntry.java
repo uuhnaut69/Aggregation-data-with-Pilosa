@@ -1,13 +1,10 @@
 package com.huutuan.project.Entity;
 
-import java.util.Set;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -27,9 +24,6 @@ public class ImageEntry {
 	private String description;
 	@Column(name = "url")
 	private String url;
-
-	@OneToMany(mappedBy = "imageentry")
-	private Set<UserImage> userImage;
 
 	/**
 	 * @return the id
@@ -85,20 +79,6 @@ public class ImageEntry {
 	 */
 	public void setUrl(String url) {
 		this.url = url;
-	}
-
-	/**
-	 * @return the userImage
-	 */
-	public Set<UserImage> getUserImage() {
-		return userImage;
-	}
-
-	/**
-	 * @param userImage the userImage to set
-	 */
-	public void setUserImage(Set<UserImage> userImage) {
-		this.userImage = userImage;
 	}
 
 }

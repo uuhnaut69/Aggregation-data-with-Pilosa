@@ -16,9 +16,9 @@ import com.huutuan.project.Entity.ImageEntry;
 @Repository
 public interface ImageRepository extends JpaRepository<ImageEntry, Long> {
 
-	@Query(value = "SELECT IMAGE_ENTRY.image_id, IMAGE_ENTRY.title, IMAGE_ENTRY.description, IMAGE_ENTRY.url, SUM(USER_IMAGE.likes), SUM(USER_IMAGE.shares) FROM IMAGE_ENTRY LEFT JOIN USER_IMAGE ON USER_IMAGE.image_id = IMAGE_ENTRY.image_id GROUP BY IMAGE_ENTRY.image_id", nativeQuery = true)
+	@Query(value = "SELECT IMAGE_ENTRY.image_id, IMAGE_ENTRY.title, IMAGE_ENTRY.description, IMAGE_ENTRY.url, SUM(USER_IMAGE_BACKUP.likes), SUM(USER_IMAGE_BACKUP.shares) FROM IMAGE_ENTRY LEFT JOIN USER_IMAGE_BACKUP ON USER_IMAGE_BACKUP.image_id = IMAGE_ENTRY.image_id GROUP BY IMAGE_ENTRY.image_id", nativeQuery = true)
 	List<Object[]> getData();
 
-	@Query(value = "SELECT IMAGE_ENTRY.image_id, IMAGE_ENTRY.title, IMAGE_ENTRY.description, IMAGE_ENTRY.url, SUM(USER_IMAGE.likes), SUM(USER_IMAGE.shares) FROM IMAGE_ENTRY LEFT JOIN USER_IMAGE ON USER_IMAGE.image_id = IMAGE_ENTRY.image_id WHERE USER_IMAGE.image_id = :id", nativeQuery = true)
+	@Query(value = "SELECT IMAGE_ENTRY.image_id, IMAGE_ENTRY.title, IMAGE_ENTRY.description, IMAGE_ENTRY.url, SUM(USER_IMAGE_BACKUP.likes), SUM(USER_IMAGE_BACKUP.shares) FROM IMAGE_ENTRY LEFT JOIN USER_IMAGE_BACKUP ON USER_IMAGE_BACKUP.image_id = IMAGE_ENTRY.image_id WHERE USER_IMAGE_BACKUP.image_id = :id", nativeQuery = true)
 	List<Object[]> getOne(@Param("id") int id);
 }

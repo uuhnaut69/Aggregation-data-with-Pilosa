@@ -1,13 +1,10 @@
 package com.huutuan.project.Entity;
 
-import java.util.Set;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -34,9 +31,6 @@ public class UserEntry {
 	private int commentKarma;
 	@Column(name = "link_karma")
 	private int linkKarma;
-
-	@OneToMany(mappedBy = "imageentry")
-	private Set<UserImage> userimage;
 
 	/**
 	 * @return the id
@@ -134,20 +128,6 @@ public class UserEntry {
 	 */
 	public void setLinkKarma(int linkKarma) {
 		this.linkKarma = linkKarma;
-	}
-
-	/**
-	 * @return the userimage
-	 */
-	public Set<UserImage> getUserimage() {
-		return userimage;
-	}
-
-	/**
-	 * @param userimage the userimage to set
-	 */
-	public void setUserimage(Set<UserImage> userimage) {
-		this.userimage = userimage;
 	}
 
 }
