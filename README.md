@@ -1,4 +1,3 @@
 # Graduate Project
 MySQL/Pilosa
-- BenchMark MySQL & Pilosa
-- Demo DashBoard
+- Demo dashboard to benchmark mysql vs pilosa (Implemented with Roaring) 
