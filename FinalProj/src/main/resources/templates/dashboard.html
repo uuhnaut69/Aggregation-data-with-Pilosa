@@ -39,17 +39,17 @@
 									<div class="row">
 										<div class="col-md-3">
 											<button class="btn btn-info"
-												th:onclick="'javascript:doBenchMark();'">
+												th:onclick="'javascript:doBenchMark();'" id="bmAll">
 												BenchMark
 												<div class="ripple-container"></div>
 											</button>
 											<span class="radio"> <label> <input
 													type="radio" name="optionsRadios"
-													value="/mysql/image/fetchAll" checked="true"> MySQL
+													value="/mysql/image/fetchAll" checked="true" id="mysql"> MySQL
 											</label>
 											</span> <span class="radio"> <label> <input
 													type="radio" value="/pilosa/image/fetchAll"
-													name="optionsRadios"> Pilosa
+													name="optionsRadios" id="pilosa"> Pilosa
 											</label>
 											</span>
 										</div>
@@ -67,19 +67,19 @@
 										th:src="@{'/images/'+ ${image.url}}" style="height: 205px;">
 									</a>
 								</div>
-								<div class="card-content" style="height: 144px">
+								<div class="card-content" style="height: 200px">
 									<div class="card-actions">
 										<button class="btn btn-info" rel="tooltip"
 											data-placement="bottom" style="height: 38px;"
-											th:onclick="'javascript:singleBenchMark(' + ${image.id} + ');'">
+											th:onclick="'javascript:singleBenchMark(' + ${image.image_id} + ');'">
 											BenchMark
 											<div class="ripple-container"></div>
 										</button>
 										<span class="radio text-center"> <label> <input
-												type="radio" name="optionsRadios2" value="/mysql/image/"
+												type="radio" th:name="${image.image_id}" value="/mysql/image/"
 												checked="true"> MySQL
 										</label> <label> <input type="radio" value="/pilosa/image/"
-												name="optionsRadios2"> Pilosa
+												th:name="${image.image_id}"> Pilosa
 										</label>
 										</span>
 									</div>
@@ -106,10 +106,8 @@
 			<div th:replace="fragments/footer :: footer"></div>
 		</div>
 	</div>
-
 	<!-- Modal show chart -->
 	<div th:replace="fragments/modal :: modal"></div>
-
 </body>
 <!--   Core JS Files   -->
 <script th:src="@{../assets/js/jquery-3.3.1.min.js}"
@@ -150,6 +148,9 @@
 		function doBenchMark(){
 			var html = "";
 			var url = $('input[name=optionsRadios]:checked').val();
+			$("#bmAll").attr('disabled', true);
+			$("#mysql").attr('disabled', true);
+			$("#pilosa").attr('disabled', true);
 				$.ajax({
 				type : "GET",
 				dataType : "json",
@@ -173,13 +174,16 @@
 							+ 'ms</span> </div></div>';
 					$("#divChart").append(html);
 					project.initCharts("mainChart",listLabel, listTotalLikes, listTotalShares);
-					project.showNotification('bottom','left');
+					$("#bmAll").attr('disabled', false);
+					$("#mysql").attr('disabled', false);
+					$("#pilosa").attr('disabled', false);
+					project.showNotification('top','right');
 				}
 			});
 		}
 	/* BenchMark with fetch by id */	
 		function singleBenchMark(id){
-			var url2 = $('input[name=optionsRadios2]:checked').val();
+			var url2 = $('input[name='+id+']:checked').val();
 			$.ajax({
 				type : "GET",
 				url : url2 + id,
@@ -188,9 +192,9 @@
 					var listLabel = [];
 					var listTotalLikes = [];
 					var listTotalShares = [];
-					listLabel.push(data.title);
-					listTotalLikes.push(data.totalLikes);
-					listTotalShares.push(data.totalShares);
+					listLabel.push(data.imageInfo.title);
+					listTotalLikes.push(data.imageInfo.totalLikes);
+					listTotalShares.push(data.imageInfo.totalShares);
 					$("#modaContentChart").remove();
 					var html = "";
 					html = '<div class="card" id="modaContentChart"><div class="card-header card-header-icon" data-background-color="rose"> <i class="material-icons">insert_chart</i> </div> <div class="card-content">'
@@ -199,16 +203,10 @@
 							+ 'ms</span> </div></div>';
 					$("#addBodyContent").append(html);
 					project.initCharts("modalChart",listLabel, listTotalLikes, listTotalShares);
-					project.showNotification('bottom','left');
-					$("#showModal").show();
-					$('#'+id).disabled=false; 
+					project.showNotification('top','right');
+					$("#showModal").modal('toggle');
 				}
 			});
 		};
-
-	/* Close modal function */	
-	$("#closeModalBtn").click(function(){
-		$("#showModal").hide();
-	});
 </script>
 </html>

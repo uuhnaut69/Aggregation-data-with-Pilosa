@@ -8,6 +8,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import com.huutuan.project.Entity.ImageEntry;
+import com.huutuan.project.Entity.ImageInfo;
 
 /**
  * @author uuhnaut
@@ -16,9 +17,11 @@ import com.huutuan.project.Entity.ImageEntry;
 @Repository
 public interface ImageRepository extends JpaRepository<ImageEntry, Long> {
 
-	@Query(value = "SELECT IMAGE_ENTRY.image_id, IMAGE_ENTRY.title, IMAGE_ENTRY.description, IMAGE_ENTRY.url, SUM(USER_IMAGE_BACKUP.likes), SUM(USER_IMAGE_BACKUP.shares) FROM IMAGE_ENTRY LEFT JOIN USER_IMAGE_BACKUP ON USER_IMAGE_BACKUP.image_id = IMAGE_ENTRY.image_id GROUP BY IMAGE_ENTRY.image_id", nativeQuery = true)
-	List<Object[]> getData();
+	@Query(value = "SELECT new com.huutuan.project.Entity.ImageInfo(a.id, a.title, a.description, a.url, SUM(b.likes), SUM(b.shares)) FROM ImageEntry a LEFT JOIN a.userImageEntity b ON b.imageEntry.id = a.id WHERE b.imageEntry.id = :id")
+	ImageInfo getImageInfoById(@Param("id") int id);
 
-	@Query(value = "SELECT IMAGE_ENTRY.image_id, IMAGE_ENTRY.title, IMAGE_ENTRY.description, IMAGE_ENTRY.url, SUM(USER_IMAGE_BACKUP.likes), SUM(USER_IMAGE_BACKUP.shares) FROM IMAGE_ENTRY LEFT JOIN USER_IMAGE_BACKUP ON USER_IMAGE_BACKUP.image_id = IMAGE_ENTRY.image_id WHERE USER_IMAGE_BACKUP.image_id = :id", nativeQuery = true)
-	List<Object[]> getOne(@Param("id") int id);
+	@Query(value = "SELECT new com.huutuan.project.Entity.ImageInfo(a.id, a.title, a.description, a.url, SUM(b.likes), SUM(b.shares)) FROM ImageEntry a LEFT JOIN a.userImageEntity b ON b.imageEntry.id = a.id GROUP BY a.id")
+	List<ImageInfo> getImagesInfo();
+
+	ImageEntry findById(int id);
 }

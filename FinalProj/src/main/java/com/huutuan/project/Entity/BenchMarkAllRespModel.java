@@ -1,24 +1,22 @@
 package com.huutuan.project.Entity;
 
 import java.util.List;
-import java.util.Map;
 
-public class ImageRespModel {
-
-	private List<Map<String, Object>> list;
+public class BenchMarkAllRespModel {
+	private List<ImageInfo> list;
 	private long runTime;
 
 	/**
 	 * @return the list
 	 */
-	public List<Map<String, Object>> getList() {
+	public List<ImageInfo> getList() {
 		return list;
 	}
 
 	/**
 	 * @param list the list to set
 	 */
-	public void setList(List<Map<String, Object>> list) {
+	public void setList(List<ImageInfo> list) {
 		this.list = list;
 	}
 

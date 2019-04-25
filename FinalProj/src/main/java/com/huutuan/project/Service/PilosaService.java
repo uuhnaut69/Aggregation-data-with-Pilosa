@@ -1,13 +1,17 @@
 package com.huutuan.project.Service;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.joda.time.DateTime;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.huutuan.project.Entity.BenchMarkAllRespModel;
+import com.huutuan.project.Entity.BenchMarkByIdRespModel;
+import com.huutuan.project.Entity.ImageEntry;
+import com.huutuan.project.Entity.ImageInfo;
+import com.huutuan.project.Repository.ImageRepository;
 import com.pilosa.client.PilosaClient;
 import com.pilosa.client.QueryResponse;
 import com.pilosa.client.exceptions.PilosaException;
@@ -23,9 +27,19 @@ import com.pilosa.client.orm.Schema;
 @Service
 public class PilosaService {
 
-	public Map<String, Object> getById(int id) {
-		long PqlStart = new DateTime().getMillis();
-		Map<String, Object> respModel = new HashMap<String, Object>();
+	@Autowired
+	private ImageRepository imageRepository;
+
+	public BenchMarkByIdRespModel getById(int id) {
+		long pqlStart = new DateTime().getMillis();
+		BenchMarkByIdRespModel respModel = new BenchMarkByIdRespModel();
+		ImageEntry imageEntry = imageRepository.findById(id);
+		ImageInfo imageInfo = new ImageInfo();
+		imageInfo.setImage_id(imageEntry.getId());
+		imageInfo.setTitle(imageEntry.getTitle());
+		imageInfo.setDescription(imageEntry.getDescription());
+		imageInfo.setUrl(imageEntry.getUrl());
+
 		// Create the default client
 		PilosaClient client = PilosaClient.defaultClient();
 		// Let's load the schema from the server.
@@ -49,29 +63,33 @@ public class PilosaService {
 		long totalLikes;
 		long totalShares;
 		// ImageUserLike index interactions
-		response = client.query(imageuserlike.row(id));
-		// Get Attributes
-		respModel = response.getResult().getRow().getAttributes();
-		// Get Total Shares
-		totalLikes = response.getResult().getRow().getColumns().size();
+		// Get Total Likes
+		query = repository.count(imageuserlike.row(id));
+		response = client.query(query);
+		totalLikes = response.getResult().getCount();
+		imageInfo.setTotalLikes(totalLikes);
 
 		// ImageUserShare index interactions
 		// Get Total Shares
 		query = repository.count(imageusershare.row(id));
 		response = client.query(query);
 		totalShares = response.getResult().getCount();
-		respModel.put("totalLikes", totalLikes);
-		respModel.put("totalShares", totalShares);
+		imageInfo.setTotalShares(totalShares);
 
-		long PqlEnd = new DateTime().getMillis();
-		long PqlRuntime = PqlEnd - PqlStart;
-		respModel.put("runTime", PqlRuntime);
+		long pqlEnd = new DateTime().getMillis();
+		long pqlRuntime = pqlEnd - pqlStart;
+		respModel.setImageInfo(imageInfo);
+		respModel.setRunTime(pqlRuntime);
 		return respModel;
 	}
 
-	public List<Map<String, Object>> getAll() {
+	@SuppressWarnings("unused")
+	public BenchMarkAllRespModel getAll() {
+		long pqlStart = new DateTime().getMillis();
+		BenchMarkAllRespModel respModel = new BenchMarkAllRespModel();
+		List<ImageInfo> list = new ArrayList<ImageInfo>();
+
 		PilosaClient client = PilosaClient.defaultClient();
-		List<Map<String, Object>> respModel = new ArrayList<Map<String, Object>>();
 		Schema schema;
 		try {
 			schema = client.readSchema();
@@ -87,19 +105,33 @@ public class PilosaService {
 		PqlQuery query;
 		long totalLikes;
 		long totalShares;
-		for (int i = 1; i <= 9; i++) {
-			response = client.query(imageuserlike.row(i));
-			Map<String, Object> attributes = response.getResult().getRow().getAttributes();
-			totalLikes = response.getResult().getRow().getColumns().size();
 
-			query = repository.count(imageusershare.row(i));
-			response = client.query(query);
-			totalShares = response.getResult().getCount();
-			attributes.put("id", i);
-			attributes.put("totalLikes", totalLikes);
-			attributes.put("totalShares", totalShares);
-			respModel.add(attributes);
+		List<ImageEntry> listImage = imageRepository.findAll();
+		if (listImage.size() > 0) {
+			for (ImageEntry image : listImage) {
+				ImageInfo item = new ImageInfo();
+				item.setImage_id(image.getId());
+				item.setTitle(image.getTitle());
+				item.setDescription(image.getDescription());
+				item.setUrl(image.getUrl());
+
+				query = repository.count(imageuserlike.row(image.getId()));
+				response = client.query(query);
+				totalLikes = response.getResult().getCount();
+				item.setTotalLikes(totalLikes);
+
+				query = repository.count(imageusershare.row(image.getId()));
+				response = client.query(query);
+				totalShares = response.getResult().getCount();
+				item.setTotalShares(totalShares);
+				list.add(item);
+
+			}
 		}
+		long pqlEnd = new DateTime().getMillis();
+		long pqlRuntime = pqlEnd - pqlStart;
+		respModel.setList(list);
+		respModel.setRunTime(pqlRuntime);
 		return respModel;
 	}
 }
