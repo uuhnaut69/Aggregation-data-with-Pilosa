@@ -4782,16 +4782,15 @@ be a descendant of the grid when it is being dragged.
     text-align: left;
     text-anchor: start;
 }
-
 .ct-label.ct-vertical.ct-start {
     -webkit-box-align: flex-end;
     -webkit-align-items: flex-end;
     -ms-flex-align: flex-end;
     align-items: flex-end;
     -webkit-box-pack: flex-end;
-    -webkit-justify-content: flex-end;
+   /*  -webkit-justify-content: flex-end; */
     -ms-flex-pack: flex-end;
-    justify-content: flex-end;
+   /*  justify-content: flex-end; */
     text-align: right;
     text-anchor: end;
 }
