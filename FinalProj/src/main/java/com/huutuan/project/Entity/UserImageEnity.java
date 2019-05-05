@@ -34,7 +34,6 @@ public class UserImageEnity {
 	}
 
 	public UserImageEnity(int id, UserEntry userEntry, ImageEntry imageEntry, long likes, long shares) {
-		super();
 		this.id = id;
 		this.userEntry = userEntry;
 		this.imageEntry = imageEntry;
