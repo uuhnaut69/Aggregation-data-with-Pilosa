@@ -35,14 +35,9 @@
 									<i class="material-icons">&#xE894;</i>
 								</div>
 								<div class="card-content">
-									<h4 class="card-title">Option</h4>
+									<h4 class="card-title">Benchmark Query's Time Options</h4>
 									<div class="row">
 										<div class="col-md-3">
-											<button class="btn btn-info"
-												th:onclick="'javascript:doBenchMark();'" id="bmAll">
-												BenchMark
-												<div class="ripple-container"></div>
-											</button>
 											<span class="radio"> <label> <input
 													type="radio" name="optionsRadios"
 													value="/mysql/image/fetchAll" checked="true" id="mysql"> MySQL
@@ -52,6 +47,11 @@
 													name="optionsRadios" id="pilosa"> Pilosa
 											</label>
 											</span>
+											<button class="btn btn-info"
+												th:onclick="'javascript:doBenchMark();'" id="bmAll">
+												BenchMark
+												<div class="ripple-container"></div>
+											</button>
 										</div>
 										<div class="col-md-9" id="divChart"></div>
 									</div>

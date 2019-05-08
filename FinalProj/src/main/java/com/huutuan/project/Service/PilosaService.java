@@ -83,7 +83,6 @@ public class PilosaService {
 		return respModel;
 	}
 
-	@SuppressWarnings("unused")
 	public BenchMarkAllRespModel getAll() {
 		long pqlStart = new DateTime().getMillis();
 		BenchMarkAllRespModel respModel = new BenchMarkAllRespModel();

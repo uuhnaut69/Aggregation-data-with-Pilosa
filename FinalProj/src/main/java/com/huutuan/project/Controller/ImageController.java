@@ -19,10 +19,15 @@ public class ImageController {
 	@Autowired
 	private PilosaService pilosaService;
 
-	@GetMapping("/")
+	@GetMapping("/dashboard")
 	public String getImages(Model model) {
 		List<ImageInfo> list = pilosaService.getAll().getList();
 		model.addAttribute("images", list);
 		return "dashboard";
+	}
+
+	@GetMapping("/")
+	public String returnLandingPage() {
+		return "landingpage";
 	}
 }
