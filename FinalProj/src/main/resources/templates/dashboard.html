@@ -38,9 +38,10 @@
 									<h4 class="card-title">Benchmark Query's Time Options</h4>
 									<div class="row">
 										<div class="col-md-3">
-											<span class="radio"> <label> <input
-													type="radio" name="optionsRadios"
-													value="/mysql/image/fetchAll" checked="true" id="mysql"> MySQL
+											Fetch All Data By <span class="radio"> <label>
+													<input type="radio" name="optionsRadios"
+													value="/mysql/image/fetchAll" checked="true" id="mysql">
+													MySQL
 											</label>
 											</span> <span class="radio"> <label> <input
 													type="radio" value="/pilosa/image/fetchAll"
@@ -72,12 +73,12 @@
 										<button class="btn btn-info" rel="tooltip"
 											data-placement="bottom" style="height: 38px;"
 											th:onclick="'javascript:singleBenchMark(' + ${image.image_id} + ');'">
-											BenchMark
+											BenchMark By Image Id
 											<div class="ripple-container"></div>
 										</button>
 										<span class="radio text-center"> <label> <input
-												type="radio" th:name="${image.image_id}" value="/mysql/image/"
-												checked="true"> MySQL
+												type="radio" th:name="${image.image_id}"
+												value="/mysql/image/" checked="true"> MySQL
 										</label> <label> <input type="radio" value="/pilosa/image/"
 												th:name="${image.image_id}"> Pilosa
 										</label>
@@ -142,71 +143,78 @@
 <!-- Material Dashboard javascript methods -->
 <script th:src="@{../assets/js/material-dashboard.js}"></script>
 <script th:src="@{../assets/js/project.js}"></script>
-
 <script type="text/javascript">
 	/* BenchMark with fetch all data */
-		function doBenchMark(){
-			var html = "";
-			var url = $('input[name=optionsRadios]:checked').val();
-			$("#bmAll").attr('disabled', true);
-			$("#mysql").attr('disabled', true);
-			$("#pilosa").attr('disabled', true);
-				$.ajax({
-				type : "GET",
-				dataType : "json",
-				url : url,
-				contentType: 'application/json; charset=utf-8',
-				success : function(data) {
-					var listLabel = [];
-					var listTotalLikes = [];
-					var listTotalShares = [];
-					if (data.list.length > 0) {
-						for (var i = 0; i < data.list.length; i++) {
-							listLabel.push(data.list[i].title);
-							listTotalLikes.push(data.list[i].totalLikes);
-							listTotalShares.push(data.list[i].totalShares);
-						}
+	function doBenchMark() {
+		var html = "";
+		var url = $('input[name=optionsRadios]:checked').val();
+		$("#bmAll").attr('disabled', true);
+		$("#mysql").attr('disabled', true);
+		$("#pilosa").attr('disabled', true);
+		$("#contentChart").remove();
+		html = '<div class="card" id="contentChart"><div class="card-header card-header-icon" data-background-color="rose"> <i class="material-icons">insert_chart</i> </div> <div class="card-content">'
+				+ '<h4 class="card-title">Likes, Shares Chart <small>- Bar Chart</small> </h4></div><div class="text-center" style="margin: 15px"><p style="font-size: 20px;font-weight: bold;">Just a sec...</p><img style="width:40px" src="/images/rubik.svg"/></div></div>';
+		$("#divChart").append(html);
+		$.ajax({
+			type : "GET",
+			dataType : "json",
+			url : url,
+			contentType : 'application/json; charset=utf-8',
+			success : function(data) {
+				var listLabel = [];
+				var listTotalLikes = [];
+				var listTotalShares = [];
+				if (data.list.length > 0) {
+					for (var i = 0; i < data.list.length; i++) {
+						listLabel.push(data.list[i].title);
+						listTotalLikes.push(data.list[i].totalLikes);
+						listTotalShares.push(data.list[i].totalShares);
 					}
-					$("#contentChart").remove();
-					html = '<div class="card" id="contentChart"><div class="card-header card-header-icon" data-background-color="rose"> <i class="material-icons">insert_chart</i> </div> <div class="card-content">'
-							+ '<h4 class="card-title">Likes, Shares Chart <small>- Bar Chart</small> </h4></div><div id="mainChart" class="ct-chart"></div><div class="tim-typo"><span class="text-primary" style="font-weight: bold; font-size: 1.4em;">Runtime: '
-							+ data.runTime
-							+ 'ms</span> </div></div>';
-					$("#divChart").append(html);
-					project.initCharts("mainChart",listLabel, listTotalLikes, listTotalShares);
-					$("#bmAll").attr('disabled', false);
-					$("#mysql").attr('disabled', false);
-					$("#pilosa").attr('disabled', false);
-					project.showNotification('top','right');
 				}
-			});
-		}
-	/* BenchMark with fetch by id */	
-		function singleBenchMark(id){
-			var url2 = $('input[name='+id+']:checked').val();
-			$.ajax({
-				type : "GET",
-				url : url2 + id,
-				contentType: 'application/json; charset=utf-8',
-				success : function(data) {
-					var listLabel = [];
-					var listTotalLikes = [];
-					var listTotalShares = [];
-					listLabel.push(data.imageInfo.title);
-					listTotalLikes.push(data.imageInfo.totalLikes);
-					listTotalShares.push(data.imageInfo.totalShares);
-					$("#modaContentChart").remove();
-					var html = "";
-					html = '<div class="card" id="modaContentChart"><div class="card-header card-header-icon" data-background-color="rose"> <i class="material-icons">insert_chart</i> </div> <div class="card-content">'
-							+ '<h4 class="card-title">Likes, Shares Chart <small>- Bar Chart</small> </h4></div><div id="modalChart" class="ct-chart"></div><div class="tim-typo"><span class="text-primary" style="font-weight: bold; font-size: 1.4em;">Runtime: '
-							+ data.runTime
-							+ 'ms</span> </div></div>';
-					$("#addBodyContent").append(html);
-					project.initCharts("modalChart",listLabel, listTotalLikes, listTotalShares);
-					project.showNotification('top','right');
-					$("#showModal").modal('toggle');
-				}
-			});
-		};
+				$("#contentChart").remove();
+				html = '<div class="card" id="contentChart"><div class="card-header card-header-icon" data-background-color="rose"> <i class="material-icons">insert_chart</i> </div> <div class="card-content">'
+						+ '<h4 class="card-title">Likes, Shares Chart <small>- Bar Chart</small> </h4></div><div id="mainChart" class="ct-chart"></div><div style="height:20px;width:20px;background-color: #00bcd4;margin-left: 25% !important;margin:1%;"><div style="padding-left: 30px;">Likes</div></div><div style="height:20px;width:20px;background-color: #f44336;margin-left: 25% !important;margin:1%;"><div style="padding-left: 30px;">Shares</div></div><div class="tim-typo"><span class="text-primary" style="font-weight: bold; font-size: 1.4em;">Runtime: '
+						+ data.runTime + 'ms</span> </div></div>';
+				$("#divChart").append(html);
+				project.initCharts("mainChart", listLabel,
+						listTotalLikes, listTotalShares);
+				$("#bmAll").attr('disabled', false);
+				$("#mysql").attr('disabled', false);
+				$("#pilosa").attr('disabled', false);
+				project.showNotification('top', 'right');
+			}
+		});
+	}
+	/* BenchMark with fetch by id */
+	function singleBenchMark(id) {
+		var html = "";
+		var url2 = $('input[name=' + id + ']:checked').val();
+		$("#modaContentChart").remove();
+		html = '<div class="card" id="modaContentChart"><div class="card-header card-header-icon" data-background-color="rose"> <i class="material-icons">insert_chart</i> </div> <div class="card-content">'
+				+ '<h4 class="card-title">Likes, Shares Chart <small>- Bar Chart</small> </h4></div><div class="text-center" style="margin: 15px"><p style="font-size: 20px;font-weight: bold;">Just a sec...</p><img style="width:40px" src="/images/rubik.svg"/></div></div>';
+		$("#addBodyContent").append(html);
+		$("#showModal").modal('toggle');
+		$.ajax({
+			type : "GET",
+			url : url2 + id,
+			contentType : 'application/json; charset=utf-8',
+			success : function(data) {
+				var listLabel = [];
+				var listTotalLikes = [];
+				var listTotalShares = [];
+				listLabel.push(data.imageInfo.title);
+				listTotalLikes.push(data.imageInfo.totalLikes);
+				listTotalShares.push(data.imageInfo.totalShares);
+				$("#modaContentChart").remove();
+				html = '<div class="card" id="modaContentChart"><div class="card-header card-header-icon" data-background-color="rose"> <i class="material-icons">insert_chart</i> </div> <div class="card-content">'
+						+ '<h4 class="card-title">Likes, Shares Chart <small>- Bar Chart</small> </h4></div><div id="modalChart" class="ct-chart"></div><div style="height:20px;width:20px;background-color: #00bcd4;margin-left: 25% !important;margin:1%;"><div style="padding-left: 30px;">Likes</div></div><div style="height:20px;width:20px;background-color: #f44336;margin-left: 25% !important;margin:1%;"><div style="padding-left: 30px;">Shares</div></div><div class="tim-typo"><span class="text-primary" style="font-weight: bold; font-size: 1.4em;">Runtime: '
+						+ data.runTime + 'ms</span> </div></div>';
+				$("#addBodyContent").append(html);
+				project.initCharts("modalChart", listLabel,
+						listTotalLikes, listTotalShares);
+				project.showNotification('top', 'right');
+			}
+		});
+	};
 </script>
 </html>
