@@ -29,7 +29,7 @@ public class ImageEntry {
 	private String url;
 
 	@OneToMany(mappedBy = "imageEntry")
-	private List<UserImageEnity> userImageEntity;
+	private List<UserImageEntity> userImageEntity;
 
 	/**
 	 * @return the id
@@ -90,14 +90,14 @@ public class ImageEntry {
 	/**
 	 * @return the userImageEntity
 	 */
-	public List<UserImageEnity> getUserImageEntity() {
+	public List<UserImageEntity> getUserImageEntity() {
 		return userImageEntity;
 	}
 
 	/**
 	 * @param userImageEntity the userImageEntity to set
 	 */
-	public void setUserImageEntity(List<UserImageEnity> userImageEntity) {
+	public void setUserImageEntity(List<UserImageEntity> userImageEntity) {
 		this.userImageEntity = userImageEntity;
 	}
 

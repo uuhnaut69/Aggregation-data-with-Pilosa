@@ -36,7 +36,7 @@ public class UserEntry {
 	private int linkKarma;
 
 	@OneToMany(mappedBy = "userEntry")
-	private List<UserImageEnity> userImageEntity;
+	private List<UserImageEntity> userImageEntity;
 
 	/**
 	 * @return the id
@@ -139,14 +139,14 @@ public class UserEntry {
 	/**
 	 * @return the userImageEntity
 	 */
-	public List<UserImageEnity> getUserImageEntity() {
+	public List<UserImageEntity> getUserImageEntity() {
 		return userImageEntity;
 	}
 
 	/**
 	 * @param userImageEntity the userImageEntity to set
 	 */
-	public void setUserImageEntity(List<UserImageEnity> userImageEntity) {
+	public void setUserImageEntity(List<UserImageEntity> userImageEntity) {
 		this.userImageEntity = userImageEntity;
 	}
 

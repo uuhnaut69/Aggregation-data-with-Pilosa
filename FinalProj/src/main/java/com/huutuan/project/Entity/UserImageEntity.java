@@ -11,7 +11,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "USER_IMAGE")
-public class UserImageEnity {
+public class UserImageEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
@@ -30,10 +30,10 @@ public class UserImageEnity {
 	@Column(name = "shares")
 	private long shares;
 
-	public UserImageEnity() {
+	public UserImageEntity() {
 	}
 
-	public UserImageEnity(int id, UserEntry userEntry, ImageEntry imageEntry, long likes, long shares) {
+	public UserImageEntity(int id, UserEntry userEntry, ImageEntry imageEntry, long likes, long shares) {
 		this.id = id;
 		this.userEntry = userEntry;
 		this.imageEntry = imageEntry;
