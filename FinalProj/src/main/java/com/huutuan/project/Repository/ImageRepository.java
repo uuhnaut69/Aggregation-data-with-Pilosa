@@ -17,10 +17,10 @@ import com.huutuan.project.Entity.ImageInfo;
 @Repository
 public interface ImageRepository extends JpaRepository<ImageEntry, Long> {
 
-	@Query(value = "SELECT new com.huutuan.project.Entity.ImageInfo(a.id, a.title, a.description, a.url, SUM(b.likes), SUM(b.shares)) FROM ImageEntry a LEFT JOIN a.userImageEntity b ON b.imageEntry.id = a.id WHERE b.imageEntry.id = :id")
+	@Query(value = "SELECT new com.huutuan.project.Entity.ImageInfo(a.id, a.title, a.description, a.url, SUM(CASE WHEN b.liked = 1 THEN 1 ELSE 0 END), SUM(CASE WHEN b.shared = 1 THEN 1 ELSE 0 END)) FROM ImageEntry a LEFT JOIN a.userImageEntity b ON b.imageEntry.id = a.id WHERE b.imageEntry.id = :id")
 	ImageInfo getImageInfoById(@Param("id") int id);
 
-	@Query(value = "SELECT new com.huutuan.project.Entity.ImageInfo(a.id, a.title, a.description, a.url, SUM(b.likes), SUM(b.shares)) FROM ImageEntry a LEFT JOIN a.userImageEntity b ON b.imageEntry.id = a.id GROUP BY a.id")
+	@Query(value = "SELECT new com.huutuan.project.Entity.ImageInfo(a.id, a.title, a.description, a.url, SUM(CASE WHEN b.liked = 1 THEN 1 ELSE 0 END), SUM(CASE WHEN b.shared = 1 THEN 1 ELSE 0 END)) FROM ImageEntry a LEFT JOIN a.userImageEntity b ON b.imageEntry.id = a.id GROUP BY a.id")
 	List<ImageInfo> getImagesInfo();
 
 	ImageEntry findById(int id);

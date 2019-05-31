@@ -25,20 +25,20 @@ public class UserImageEntity {
 	@JoinColumn(name = "image_id")
 	private ImageEntry imageEntry;
 
-	@Column(name = "likes")
-	private long likes;
-	@Column(name = "shares")
-	private long shares;
+	@Column(name = "liked")
+	private boolean liked;
+	@Column(name = "shared")
+	private boolean shared;
 
 	public UserImageEntity() {
 	}
 
-	public UserImageEntity(int id, UserEntry userEntry, ImageEntry imageEntry, long likes, long shares) {
+	public UserImageEntity(int id, UserEntry userEntry, ImageEntry imageEntry, boolean liked, boolean shared) {
 		this.id = id;
 		this.userEntry = userEntry;
 		this.imageEntry = imageEntry;
-		this.likes = likes;
-		this.shares = shares;
+		this.liked = liked;
+		this.shared = shared;
 	}
 
 	/**
@@ -84,31 +84,31 @@ public class UserImageEntity {
 	}
 
 	/**
-	 * @return the likes
+	 * @return the liked
 	 */
-	public long getLikes() {
-		return likes;
+	public boolean isLiked() {
+		return liked;
 	}
 
 	/**
-	 * @param likes the likes to set
+	 * @param liked the liked to set
 	 */
-	public void setLikes(long likes) {
-		this.likes = likes;
+	public void setLiked(boolean liked) {
+		this.liked = liked;
 	}
 
 	/**
-	 * @return the shares
+	 * @return the shared
 	 */
-	public long getShares() {
-		return shares;
+	public boolean isShared() {
+		return shared;
 	}
 
 	/**
-	 * @param shares the shares to set
+	 * @param shared the shared to set
 	 */
-	public void setShares(long shares) {
-		this.shares = shares;
+	public void setShared(boolean shared) {
+		this.shared = shared;
 	}
 
 }
