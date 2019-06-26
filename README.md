@@ -1,6 +1,6 @@
-# Graduate Project
+# Aggregation data with Pilosa
 MySQL/Pilosa
-- Demo dashboard to benchmark mysql vs pilosa (Implemented with Roaring).
+- Demo dashboard to benchmark aggregation data between mysql and pilosa (Implemented with Roaring).
 
 Dataset used in this project:
 - Users Dataset (69M records): https://drive.google.com/open?id=1UFIMUYdvJKq3O3jXQTBzPZVCu26Oq2Ft
