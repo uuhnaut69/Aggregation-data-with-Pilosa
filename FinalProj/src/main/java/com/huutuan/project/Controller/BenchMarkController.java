@@ -24,26 +24,22 @@ public class BenchMarkController {
 
 	@GetMapping("/mysql/image/{id}")
 	public BenchMarkByIdRespModel mysqlBenchMarkById(@PathVariable int id) {
-		BenchMarkByIdRespModel respModel = mySqlService.getById(id);
-		return respModel;
+		return mySqlService.getById(id);
 	}
 
 	@GetMapping("/mysql/image/fetchAll")
 	public BenchMarkAllRespModel mysqlBenchMark() {
-		BenchMarkAllRespModel respModel = mySqlService.getAll();
-		return respModel;
+		return mySqlService.getAll();
 	}
 
 	@GetMapping("/pilosa/image/{id}")
 	public BenchMarkByIdRespModel pilosaBenchMarkById(@PathVariable int id) {
-		BenchMarkByIdRespModel respModel = pilosaService.getById(id);
-		return respModel;
+		return pilosaService.getById(id);
 	}
 
 	@GetMapping("/pilosa/image/fetchAll")
 	public BenchMarkAllRespModel pilosaBenchMark() {
-		BenchMarkAllRespModel respModel = pilosaService.getAll();
-		return respModel;
+		return pilosaService.getAll();
 	}
 
 }
