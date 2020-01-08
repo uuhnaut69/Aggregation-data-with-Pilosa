@@ -1,17 +1,12 @@
-package com.huutuan.project.Service;
+package com.uuhnaut69.api.service.impl;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import org.joda.time.DateTime;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import com.huutuan.project.Entity.BenchMarkAllRespModel;
-import com.huutuan.project.Entity.BenchMarkByIdRespModel;
-import com.huutuan.project.Entity.ImageEntry;
-import com.huutuan.project.Entity.ImageInfo;
-import com.huutuan.project.Repository.ImageRepository;
 import com.pilosa.client.PilosaClient;
 import com.pilosa.client.QueryResponse;
 import com.pilosa.client.exceptions.PilosaException;
@@ -19,23 +14,36 @@ import com.pilosa.client.orm.Field;
 import com.pilosa.client.orm.Index;
 import com.pilosa.client.orm.PqlQuery;
 import com.pilosa.client.orm.Schema;
+import com.uuhnaut69.api.entity.Image;
+import com.uuhnaut69.api.entity.view.ImageView;
+import com.uuhnaut69.api.payload.BenchMarkAllResponse;
+import com.uuhnaut69.api.payload.BenchMarkByIdResponse;
+import com.uuhnaut69.api.repository.ImageRepository;
+import com.uuhnaut69.api.service.PilosaQueryService;
+
+import javassist.NotFoundException;
 
 /**
  * @author uuhnaut
  *
  */
 @Service
-public class PilosaService {
+@Transactional(readOnly = true)
+public class PilosaQueryServiceImpl implements PilosaQueryService {
 
-	@Autowired
-	private ImageRepository imageRepository;
+	private final ImageRepository imageRepository;
 
-	public BenchMarkByIdRespModel getById(int id) {
+	public PilosaQueryServiceImpl(ImageRepository imageRepository) {
+		this.imageRepository = imageRepository;
+	}
+
+	@Override
+	public BenchMarkByIdResponse getById(Long id) throws Exception {
 		long pqlStart = new DateTime().getMillis();
-		BenchMarkByIdRespModel respModel = new BenchMarkByIdRespModel();
-		ImageEntry imageEntry = imageRepository.findById(id);
-		ImageInfo imageInfo = new ImageInfo();
-		imageInfo.setImage_id(imageEntry.getId());
+		BenchMarkByIdResponse respModel = new BenchMarkByIdResponse();
+		Image imageEntry = imageRepository.findById(id).orElseThrow(() -> new NotFoundException("Can't find"));
+		ImageView imageInfo = new ImageView();
+		imageInfo.setId(imageEntry.getId());
 		imageInfo.setTitle(imageEntry.getTitle());
 		imageInfo.setDescription(imageEntry.getDescription());
 		imageInfo.setUrl(imageEntry.getUrl());
@@ -83,10 +91,11 @@ public class PilosaService {
 		return respModel;
 	}
 
-	public BenchMarkAllRespModel getAll() {
+	@Override
+	public BenchMarkAllResponse getAll() throws Exception {
 		long pqlStart = new DateTime().getMillis();
-		BenchMarkAllRespModel respModel = new BenchMarkAllRespModel();
-		List<ImageInfo> list = new ArrayList<ImageInfo>();
+		BenchMarkAllResponse respModel = new BenchMarkAllResponse();
+		List<ImageView> list = new ArrayList<ImageView>();
 
 		PilosaClient client = PilosaClient.defaultClient();
 		Schema schema;
@@ -105,11 +114,11 @@ public class PilosaService {
 		long totalLikes;
 		long totalShares;
 
-		List<ImageEntry> listImage = imageRepository.findAll();
-		if (listImage.size() > 0) {
-			for (ImageEntry image : listImage) {
-				ImageInfo item = new ImageInfo();
-				item.setImage_id(image.getId());
+		List<Image> listImage = imageRepository.findAll();
+		if (!listImage.isEmpty()) {
+			for (Image image : listImage) {
+				ImageView item = new ImageView();
+				item.setId(image.getId());
 				item.setTitle(image.getTitle());
 				item.setDescription(image.getDescription());
 				item.setUrl(image.getUrl());
@@ -124,7 +133,6 @@ public class PilosaService {
 				totalShares = response.getResult().getCount();
 				item.setTotalShares(totalShares);
 				list.add(item);
-
 			}
 		}
 		long pqlEnd = new DateTime().getMillis();
@@ -133,4 +141,5 @@ public class PilosaService {
 		respModel.setRunTime(pqlRuntime);
 		return respModel;
 	}
+
 }
